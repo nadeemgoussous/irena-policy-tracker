@@ -1,0 +1,7 @@
+# IRENA internal website template — do not publish
+webpage_design.html
+webpage_design_files/
+
+# Python
+__pycache__/
+*.pyc

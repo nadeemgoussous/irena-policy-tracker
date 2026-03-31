@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Renewable Energy Policy Tracker — IRENA</title>
+
+  <!-- D3.js + TopoJSON via CDN (replace with local copies for Sitecore) -->
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+
+  <style>
+    /* ── IRENA design tokens ── */
+    :root {
+      --irena-blue:       #003F73;
+      --irena-teal:       #00A3E0;
+      --irena-teal-light: #E6F5FC;
+      --irena-grey-bg:    #F5F5F5;
+      --irena-grey-mid:   #D0D0D0;
+      --irena-grey-dark:  #555555;
+      --irena-white:      #FFFFFF;
+      --irena-red:        #C0392B;
+      --irena-green:      #27AE60;
+      --irena-orange:     #E67E22;
+      --irena-yellow:     #F1C40F;
+      --max-width:        1316px;
+      --radius:           4px;
+      --shadow:           0 2px 8px rgba(0,0,0,0.10);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      background: var(--irena-grey-bg);
+      color: #222;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: var(--irena-blue);
+      color: var(--irena-white);
+      padding: 0 24px;
+    }
+    .header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      height: 64px;
+    }
+    .header-logo {
+      height: 36px;
+      width: auto;
+      flex-shrink: 0;
+    }
+    .header-divider {
+      width: 1px;
+      height: 32px;
+      background: rgba(255,255,255,0.3);
+    }
+    .header-title {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      flex: 1;
+    }
+    .header-updated {
+      font-size: 12px;
+      color: rgba(255,255,255,0.65);
+      white-space: nowrap;
+    }
+
+    /* ── Hero band ── */
+    .hero {
+      background: linear-gradient(135deg, var(--irena-blue) 0%, #005A9E 100%);
+      color: var(--irena-white);
+      padding: 32px 24px;
+    }
+    .hero-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .hero h1 {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .hero p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.80);
+      max-width: 720px;
+    }
+
+    /* ── Main wrapper ── */
+    .wrapper {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    /* ── Stats bar ── */
+    .stats-bar {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .stat-card {
+      background: var(--irena-white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 14px 20px;
+      flex: 1;
+      min-width: 140px;
+      border-top: 3px solid var(--irena-teal);
+    }
+    .stat-card .stat-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--irena-blue);
+      line-height: 1;
+    }
+    .stat-card .stat-label {
+      font-size: 11px;
+      color: var(--irena-grey-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 4px;
+    }
+
+    /* ── Filter panel ── */
+    .filters {
+      background: var(--irena-white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-end;
+      flex-wrap: wrap;
+    }
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+      min-width: 140px;
+    }
+    .filter-group label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--irena-grey-dark);
+    }
+    .filter-group select,
+    .filter-group input {
+      border: 1px solid var(--irena-grey-mid);
+      border-radius: var(--radius);
+      padding: 7px 10px;
+      font-size: 13px;
+      color: #222;
+      background: var(--irena-white);
+      width: 100%;
+      height: 34px;
+      outline: none;
+      transition: border-color .15s;
+    }
+    .filter-group select:focus,
+    .filter-group input:focus {
+      border-color: var(--irena-teal);
+    }
+    .filter-group.search-group { flex: 2; min-width: 200px; }
+    .filter-group.search-group input { padding-left: 32px; }
+    .search-wrap { position: relative; }
+    .search-wrap::before {
+      content: "⌕";
+      position: absolute;
+      left: 9px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--irena-grey-mid);
+      font-size: 16px;
+      pointer-events: none;
+    }
+    .btn-clear {
+      background: none;
+      border: 1px solid var(--irena-grey-mid);
+      border-radius: var(--radius);
+      padding: 7px 14px;
+      font-size: 12px;
+      cursor: pointer;
+      color: var(--irena-grey-dark);
+      height: 34px;
+      white-space: nowrap;
+      transition: all .15s;
+      align-self: flex-end;
+    }
+    .btn-clear:hover { border-color: var(--irena-teal); color: var(--irena-teal); }
+
+    /* ── Map card ── */
+    .map-card {
+      background: var(--irena-white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .map-card h2 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--irena-blue);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .map-card h2 span.map-note {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--irena-grey-dark);
+    }
+    #map-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+    #map-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .country-path {
+      stroke: #fff;
+      stroke-width: 0.5px;
+      cursor: pointer;
+      transition: opacity .15s;
+    }
+    .country-path:hover { opacity: 0.8; }
+    .country-path.selected {
+      stroke: var(--irena-teal);
+      stroke-width: 2px;
+    }
+
+    /* ── Tooltip ── */
+    #tooltip {
+      position: fixed;
+      background: rgba(0,0,0,0.85);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: var(--radius);
+      font-size: 12px;
+      pointer-events: none;
+      z-index: 9999;
+      display: none;
+      max-width: 200px;
+      line-height: 1.4;
+    }
+    #tooltip strong { display: block; font-size: 13px; }
+
+    /* ── Legend ── */
+    .map-legend {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .legend-label { font-size: 11px; color: var(--irena-grey-dark); margin-right: 4px; }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: var(--irena-grey-dark);
+    }
+    .legend-swatch {
+      width: 16px;
+      height: 12px;
+      border-radius: 2px;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+
+    /* ── Table card ── */
+    .table-card {
+      background: var(--irena-white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+    .table-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .table-header-row h2 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--irena-blue);
+    }
+    .table-count {
+      font-size: 12px;
+      color: var(--irena-grey-dark);
+    }
+    .table-count strong { color: var(--irena-blue); }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    thead th {
+      background: var(--irena-blue);
+      color: var(--irena-white);
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 12px;
+      white-space: nowrap;
+      cursor: pointer;
+      user-select: none;
+      position: sticky;
+      top: 0;
+    }
+    thead th:hover { background: #005A9E; }
+    thead th .sort-icon { margin-left: 4px; opacity: 0.5; }
+    thead th.sort-asc .sort-icon::after  { content: " ▲"; }
+    thead th.sort-desc .sort-icon::after { content: " ▼"; }
+    thead th:not(.sort-asc):not(.sort-desc) .sort-icon::after { content: " ⇅"; }
+
+    tbody tr { border-bottom: 1px solid #EEE; transition: background .1s; }
+    tbody tr:hover { background: var(--irena-teal-light); }
+    tbody tr.highlighted { background: #E0F4FD; }
+    tbody td { padding: 10px 12px; vertical-align: top; }
+    tbody td.country-cell { font-weight: 600; white-space: nowrap; }
+    tbody td.desc-cell { max-width: 300px; color: var(--irena-grey-dark); }
+    tbody td.desc-cell .desc-short { display: block; }
+    tbody td.desc-cell .desc-full  { display: none; }
+
+    /* ── Status badges ── */
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .badge-emergency    { background: #FDEDEC; color: #922B21; }
+    .badge-target       { background: #D6EAF8; color: #1A5276; }
+    .badge-market       { background: #D5F5E3; color: #1D6A36; }
+    .badge-existing     { background: #E8F8F5; color: #1A6B54; }
+    .badge-analysis     { background: #F4ECF7; color: #6C3483; }
+    .badge-mandate      { background: #FEF9E7; color: #9A6A00; }
+    .badge-infra        { background: #EAF2FF; color: #1B4F99; }
+    .badge-incentive    { background: #FEF5E7; color: #A04000; }
+    .badge-finance      { background: #EBF5FB; color: #1A5276; }
+    .badge-under-review { background: #FEF9E7; color: #9A6A00; }
+
+    /* ── Source link ── */
+    .source-link {
+      color: var(--irena-teal);
+      text-decoration: none;
+      font-size: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .source-link:hover { text-decoration: underline; }
+
+    /* ── Pagination ── */
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+    .page-btn {
+      background: var(--irena-white);
+      border: 1px solid var(--irena-grey-mid);
+      border-radius: var(--radius);
+      padding: 5px 12px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all .15s;
+      color: #222;
+    }
+    .page-btn:hover { border-color: var(--irena-teal); color: var(--irena-teal); }
+    .page-btn.active { background: var(--irena-blue); border-color: var(--irena-blue); color: #fff; }
+    .page-btn:disabled { opacity: 0.4; cursor: default; }
+
+    /* ── Selected country strip ── */
+    .active-country-bar {
+      display: none;
+      background: var(--irena-teal-light);
+      border: 1px solid var(--irena-teal);
+      border-radius: var(--radius);
+      padding: 8px 16px;
+      margin-bottom: 16px;
+      font-size: 13px;
+      color: var(--irena-blue);
+      align-items: center;
+      gap: 12px;
+    }
+    .active-country-bar.visible { display: flex; }
+    .active-country-bar strong { font-weight: 700; }
+    .active-country-bar button {
+      margin-left: auto;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--irena-teal);
+      font-size: 14px;
+      padding: 0 4px;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      background: var(--irena-blue);
+      color: rgba(255,255,255,0.65);
+      text-align: center;
+      padding: 20px;
+      font-size: 12px;
+      margin-top: 32px;
+    }
+    .footer a { color: var(--irena-teal); text-decoration: none; }
+
+    @media (max-width: 767px) {
+      .hero h1 { font-size: 20px; }
+      .wrapper { padding: 16px; }
+      .stats-bar { gap: 10px; }
+      .stat-card { min-width: 100px; padding: 10px 14px; }
+      .stat-card .stat-value { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="header">
+  <div class="header-inner">
+    <svg class="header-logo" viewBox="0 0 260 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="IRENA">
+      <!-- Simplified IRENA wordmark in white -->
+      <text x="0" y="44" font-family="Arial, sans-serif" font-weight="700" font-size="42" fill="white" letter-spacing="2">IRENA</text>
+    </svg>
+    <div class="header-divider"></div>
+    <div class="header-title">Renewable Energy Policy Tracker</div>
+    <div class="header-updated" id="header-updated">Last updated: —</div>
+  </div>
+</header>
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <div class="hero-inner">
+    <h1>Global Renewable Energy Policy Database</h1>
+    <p>Policy and market responses to the 2026 Iran war energy crisis — tracking emergency measures, structural RE acceleration, and clean energy investments across countries and multilateral organizations. Use the map and filters to explore by country, sector, and type.</p>
+  </div>
+</section>
+
+<!-- ── Main ── -->
+<div class="wrapper">
+
+  <!-- Stats bar -->
+  <div class="stats-bar">
+    <div class="stat-card">
+      <div class="stat-value" id="stat-total">—</div>
+      <div class="stat-label">Total Measures</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="stat-countries">—</div>
+      <div class="stat-label">Countries / Orgs</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="stat-emergency">—</div>
+      <div class="stat-label">Emergency Measures</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="stat-sectors">—</div>
+      <div class="stat-label">Sectors</div>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="filters">
+    <div class="filter-group">
+      <label>Region</label>
+      <select id="filter-region">
+        <option value="">All Regions</option>
+        <option>Africa</option>
+        <option>Americas</option>
+        <option>Asia-Pacific</option>
+        <option>Europe</option>
+        <option>International</option>
+        <option>Middle East</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Sector</label>
+      <select id="filter-sector">
+        <option value="">All Sectors</option>
+        <option>Biofuels</option>
+        <option>Conservation</option>
+        <option>Cross-cutting</option>
+        <option>Energy Efficiency</option>
+        <option>Grid / Storage</option>
+        <option>Hydro</option>
+        <option>Nuclear</option>
+        <option>Solar</option>
+        <option>Transport / EVs</option>
+        <option>Wind</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Policy Type</label>
+      <select id="filter-type">
+        <option value="">All Types</option>
+        <option>Analysis</option>
+        <option>Emergency Measure</option>
+        <option>Existing Capacity</option>
+        <option>Financing / Strategy</option>
+        <option>Incentive</option>
+        <option>Infrastructure</option>
+        <option>Mandate / Regulation</option>
+        <option>Market Response</option>
+        <option>Target / Strategy</option>
+      </select>
+    </div>
+    <div class="filter-group search-group">
+      <label>Search</label>
+      <div class="search-wrap">
+        <input type="text" id="filter-search" placeholder="Country or policy name…">
+      </div>
+    </div>
+    <button class="btn-clear" id="btn-clear">✕ Clear</button>
+  </div>
+
+  <!-- Active country indicator -->
+  <div class="active-country-bar" id="active-country-bar">
+    Showing measures for <strong id="active-country-name"></strong>
+    <button id="btn-deselect" title="Clear country selection">✕ Clear</button>
+  </div>
+
+  <!-- Map -->
+  <div class="map-card">
+    <h2>
+      Policy Distribution by Country
+      <span class="map-note">— click a country to filter the table</span>
+    </h2>
+    <div id="map-container">
+      <svg id="map-svg" viewBox="0 0 960 480" preserveAspectRatio="xMidYMid meet"></svg>
+    </div>
+    <div class="map-legend">
+      <span class="legend-label">Measures:</span>
+      <div class="legend-item"><div class="legend-swatch" style="background:#D0D0D0"></div> 0</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#B8DFF5"></div> 1–2</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#5AB8E8"></div> 3–5</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#0073B7"></div> 6–9</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#003F73"></div> 10+</div>
+      <div style="margin-left:20px" class="legend-item"><div class="legend-swatch" style="background:#E0F4FD;border:2px solid #00A3E0"></div> Selected</div>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="table-card">
+    <div class="table-header-row">
+      <h2>Policy &amp; Measure Details</h2>
+      <span class="table-count" id="table-count"></span>
+    </div>
+    <div class="table-wrap">
+      <table id="policy-table">
+        <thead>
+          <tr>
+            <th data-col="country">Country / Org<span class="sort-icon"></span></th>
+            <th data-col="region">Region<span class="sort-icon"></span></th>
+            <th data-col="policy_name">Policy / Measure<span class="sort-icon"></span></th>
+            <th data-col="sector">Sector<span class="sort-icon"></span></th>
+            <th data-col="policy_type">Type<span class="sort-icon"></span></th>
+            <th data-col="date">Date<span class="sort-icon"></span></th>
+            <th>Key Details</th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
+    <div class="pagination" id="pagination"></div>
+  </div>
+</div>
+
+<!-- Tooltip -->
+<div id="tooltip"></div>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>© <span id="year-footer"></span> International Renewable Energy Agency (IRENA). Data for illustrative purposes.</p>
+</footer>
+
+<script>
+// ── State ──────────────────────────────────────────────────────────────────
+const state = {
+  allPolicies:     [],
+  filtered:        [],
+  selectedCountry: null,
+  sortCol:         'country',
+  sortDir:         'asc',
+  page:            1,
+  pageSize:        25,
+  countryPolicyCounts: {},
+  iso3ToName:      {}
+};
+
+const COLOR_SCALE = [
+  { min: 0,  max: 0,  color: '#D0D0D0' },
+  { min: 1,  max: 2,  color: '#B8DFF5' },
+  { min: 3,  max: 5,  color: '#5AB8E8' },
+  { min: 6,  max: 9,  color: '#0073B7' },
+  { min: 10, max: Infinity, color: '#003F73' }
+];
+
+function policyColor(count) {
+  for (const b of COLOR_SCALE) {
+    if (count >= b.min && count <= b.max) return b.color;
+  }
+  return '#D0D0D0';
+}
+
+function typeBadgeClass(t) {
+  switch (t) {
+    case 'Emergency Measure':   return 'badge-emergency';
+    case 'Target / Strategy':   return 'badge-target';
+    case 'Market Response':     return 'badge-market';
+    case 'Existing Capacity':   return 'badge-existing';
+    case 'Analysis':            return 'badge-analysis';
+    case 'Mandate / Regulation':return 'badge-mandate';
+    case 'Infrastructure':      return 'badge-infra';
+    case 'Incentive':           return 'badge-incentive';
+    case 'Financing / Strategy':return 'badge-finance';
+    default:                    return 'badge-analysis';
+  }
+}
+
+// ── Load data ───────────────────────────────────────────────────────────────
+async function init() {
+  document.getElementById('year-footer').textContent = new Date().getFullYear();
+
+  const [dataResp, topoResp] = await Promise.all([
+    fetch('./data.json'),
+    fetch('./world-110m.json')
+  ]);
+
+  const data  = await dataResp.json();
+  const world = await topoResp.json();
+
+  state.allPolicies = data.policies;
+
+  // Last updated
+  document.getElementById('header-updated').textContent = 'Last updated: ' + data.last_updated;
+
+  // Stats
+  document.getElementById('stat-total').textContent     = data.policies.length;
+  document.getElementById('stat-countries').textContent = new Set(data.policies.map(p => p.iso3)).size;
+  document.getElementById('stat-emergency').textContent = data.policies.filter(p => p.policy_type === 'Emergency Measure').length;
+  document.getElementById('stat-sectors').textContent   = new Set(data.policies.map(p => p.sector)).size;
+
+  // Draw map
+  drawMap(world);
+
+  // Initial render
+  applyFilters();
+}
+
+// ── Map ──────────────────────────────────────────────────────────────────────
+function drawMap(world) {
+  const svg       = d3.select('#map-svg');
+  const projection = d3.geoNaturalEarth1()
+    .scale(153)
+    .translate([480, 240]);
+  const path = d3.geoPath().projection(projection);
+
+  const countries = topojson.feature(world, world.objects.countries);
+
+  // Build iso3 lookup from numeric code
+  // TopoJSON from world-atlas uses ISO 3166-1 numeric IDs
+  // We map those to iso3 via the data itself + a small embedded lookup
+  const NUM_TO_ISO3 = buildNumericToIso3();
+
+  // Build name lookup from iso3
+  countries.features.forEach(f => {
+    const iso3 = NUM_TO_ISO3[f.id];
+    if (iso3) {
+      // find matching policy country name
+      const match = state.allPolicies.find(p => p.iso3 === iso3);
+      if (match) state.iso3ToName[iso3] = match.country;
+    }
+  });
+
+  // Render globe outline
+  svg.append('path')
+    .datum({ type: 'Sphere' })
+    .attr('d', path)
+    .attr('fill', '#EAF4FB')
+    .attr('stroke', '#BFD9EC')
+    .attr('stroke-width', 0.5);
+
+  // Graticule
+  svg.append('path')
+    .datum(d3.geoGraticule()())
+    .attr('d', path)
+    .attr('fill', 'none')
+    .attr('stroke', '#D5E8F5')
+    .attr('stroke-width', 0.3);
+
+  // Countries
+  svg.selectAll('.country-path')
+    .data(countries.features)
+    .join('path')
+      .attr('class', 'country-path')
+      .attr('d', path)
+      .attr('data-id', d => d.id)
+      .attr('data-iso3', d => NUM_TO_ISO3[d.id] || '')
+      .attr('fill', d => {
+        const iso3 = NUM_TO_ISO3[d.id];
+        const cnt  = iso3 ? (state.countryPolicyCounts[iso3] || 0) : 0;
+        return policyColor(cnt);
+      })
+    .on('mouseover', function(event, d) {
+      const iso3   = NUM_TO_ISO3[d.id];
+      const cname  = iso3 ? (state.iso3ToName[iso3] || iso3) : 'Unknown';
+      const cnt    = iso3 ? (state.countryPolicyCounts[iso3] || 0) : 0;
+      const tip    = document.getElementById('tooltip');
+      tip.innerHTML = `<strong>${cname}</strong>${cnt} ${cnt===1?'measure':'measures'}`;
+      tip.style.display = 'block';
+    })
+    .on('mousemove', function(event) {
+      const tip = document.getElementById('tooltip');
+      tip.style.left = (event.clientX + 14) + 'px';
+      tip.style.top  = (event.clientY - 28) + 'px';
+    })
+    .on('mouseout', function() {
+      document.getElementById('tooltip').style.display = 'none';
+    })
+    .on('click', function(event, d) {
+      const iso3 = NUM_TO_ISO3[d.id];
+      if (!iso3) return;
+      const cnt  = state.allPolicies.filter(p => p.iso3 === iso3).length;
+      if (cnt === 0) return;
+      if (state.selectedCountry === iso3) {
+        deselectCountry();
+      } else {
+        selectCountry(iso3, state.iso3ToName[iso3] || iso3);
+      }
+    });
+
+  // Store path function for later redraws
+  state._path         = path;
+  state._num2iso3     = NUM_TO_ISO3;
+  state._countriesData = countries.features;
+}
+
+function updateMapColors() {
+  d3.selectAll('.country-path').attr('fill', function() {
+    const iso3    = this.getAttribute('data-iso3');
+    const cnt     = iso3 ? (state.countryPolicyCounts[iso3] || 0) : 0;
+    const sel     = state.selectedCountry;
+    if (sel && iso3 === sel) return '#E0F4FD';
+    return policyColor(cnt);
+  })
+  .classed('selected', function() {
+    return this.getAttribute('data-iso3') === state.selectedCountry;
+  });
+}
+
+function selectCountry(iso3, name) {
+  state.selectedCountry = iso3;
+  const bar  = document.getElementById('active-country-bar');
+  const nm   = document.getElementById('active-country-name');
+  nm.textContent = name;
+  bar.classList.add('visible');
+  updateMapColors();
+  applyFilters();
+}
+
+function deselectCountry() {
+  state.selectedCountry = null;
+  document.getElementById('active-country-bar').classList.remove('visible');
+  updateMapColors();
+  applyFilters();
+}
+
+// ── Filters ──────────────────────────────────────────────────────────────────
+function applyFilters() {
+  const region  = document.getElementById('filter-region').value;
+  const sector  = document.getElementById('filter-sector').value;
+  const type    = document.getElementById('filter-type').value;
+  const search  = document.getElementById('filter-search').value.toLowerCase().trim();
+
+  state.filtered = state.allPolicies.filter(p => {
+    if (region && p.region !== region)                                 return false;
+    if (sector && p.sector !== sector)                                 return false;
+    if (type   && p.policy_type !== type)                              return false;
+    if (search && !p.country.toLowerCase().includes(search)
+               && !p.policy_name.toLowerCase().includes(search))      return false;
+    if (state.selectedCountry && p.iso3 !== state.selectedCountry)    return false;
+    return true;
+  });
+
+  // Recompute per-country counts from filtered set
+  state.countryPolicyCounts = {};
+  state.filtered.forEach(p => {
+    state.countryPolicyCounts[p.iso3] = (state.countryPolicyCounts[p.iso3] || 0) + 1;
+  });
+
+  state.page = 1;
+  updateMapColors();
+  renderTable();
+}
+
+// ── Table ────────────────────────────────────────────────────────────────────
+function renderTable() {
+  // Sort
+  const col = state.sortCol;
+  const dir = state.sortDir === 'asc' ? 1 : -1;
+  const sorted = [...state.filtered].sort((a, b) => {
+    const av = a[col] ?? '';
+    const bv = b[col] ?? '';
+    if (typeof av === 'number') return (av - bv) * dir;
+    return av.toString().localeCompare(bv.toString()) * dir;
+  });
+
+  // Pagination
+  const total = sorted.length;
+  const pages = Math.max(1, Math.ceil(total / state.pageSize));
+  if (state.page > pages) state.page = pages;
+  const start = (state.page - 1) * state.pageSize;
+  const slice = sorted.slice(start, start + state.pageSize);
+
+  // Count
+  document.getElementById('table-count').innerHTML =
+    `Showing <strong>${Math.min(start+1, total)}–${Math.min(start+state.pageSize, total)}</strong> of <strong>${total}</strong> measure${total===1?'':'s'}`;
+
+  // Rows
+  const tbody = document.getElementById('table-body');
+  tbody.innerHTML = slice.map(p => `
+    <tr data-iso3="${p.iso3}" class="${p.iso3 === state.selectedCountry ? 'highlighted' : ''}">
+      <td class="country-cell">${esc(p.country)}</td>
+      <td>${esc(p.region)}</td>
+      <td><strong>${esc(p.policy_name)}</strong></td>
+      <td>${esc(p.sector)}</td>
+      <td><span class="badge ${typeBadgeClass(p.policy_type)}">${esc(p.policy_type)}</span></td>
+      <td style="white-space:nowrap;font-size:12px;color:#555">${esc(p.date)}</td>
+      <td class="desc-cell">${esc(p.quantitative_details)}</td>
+    </tr>
+  `).join('');
+
+  // Click row → select country on map (skip INT = multilateral orgs)
+  tbody.querySelectorAll('tr').forEach(row => {
+    row.addEventListener('click', () => {
+      const iso3 = row.getAttribute('data-iso3');
+      if (!iso3 || iso3 === 'INT') return;
+      if (state.selectedCountry === iso3) {
+        deselectCountry();
+      } else {
+        const name = state.allPolicies.find(p => p.iso3 === iso3)?.country || iso3;
+        selectCountry(iso3, name);
+      }
+    });
+  });
+
+  // Sort headers
+  document.querySelectorAll('thead th[data-col]').forEach(th => {
+    th.classList.remove('sort-asc','sort-desc');
+    if (th.dataset.col === state.sortCol) {
+      th.classList.add(state.sortDir === 'asc' ? 'sort-asc' : 'sort-desc');
+    }
+  });
+
+  // Pagination
+  renderPagination(pages);
+}
+
+function renderPagination(pages) {
+  const pag = document.getElementById('pagination');
+  if (pages <= 1) { pag.innerHTML = ''; return; }
+  let html = `<button class="page-btn" id="pg-prev" ${state.page===1?'disabled':''}>← Prev</button>`;
+  for (let i = 1; i <= pages; i++) {
+    if (pages > 7 && Math.abs(i - state.page) > 2 && i !== 1 && i !== pages) {
+      if (i === 2 || i === pages-1) html += `<span style="padding:0 4px;color:#aaa">…</span>`;
+      continue;
+    }
+    html += `<button class="page-btn${i===state.page?' active':''}" data-pg="${i}">${i}</button>`;
+  }
+  html += `<button class="page-btn" id="pg-next" ${state.page===pages?'disabled':''}>Next →</button>`;
+  pag.innerHTML = html;
+
+  pag.querySelector('#pg-prev')?.addEventListener('click', () => { state.page--; renderTable(); });
+  pag.querySelector('#pg-next')?.addEventListener('click', () => { state.page++; renderTable(); });
+  pag.querySelectorAll('[data-pg]').forEach(btn => {
+    btn.addEventListener('click', () => { state.page = parseInt(btn.dataset.pg); renderTable(); });
+  });
+}
+
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Wire up controls ──────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  ['filter-region','filter-sector','filter-type'].forEach(id => {
+    document.getElementById(id).addEventListener('change', applyFilters);
+  });
+  document.getElementById('filter-search').addEventListener('input', applyFilters);
+  document.getElementById('btn-clear').addEventListener('click', () => {
+    ['filter-region','filter-sector','filter-type'].forEach(id =>
+      document.getElementById(id).value = '');
+    document.getElementById('filter-search').value = '';
+    deselectCountry();
+    applyFilters();
+  });
+  document.getElementById('btn-deselect').addEventListener('click', deselectCountry);
+
+  document.querySelectorAll('thead th[data-col]').forEach(th => {
+    th.addEventListener('click', () => {
+      const col = th.dataset.col;
+      if (state.sortCol === col) {
+        state.sortDir = state.sortDir === 'asc' ? 'desc' : 'asc';
+      } else {
+        state.sortCol = col;
+        state.sortDir = 'asc';
+      }
+      renderTable();
+    });
+  });
+
+  init();
+});
+
+// ── ISO numeric → ISO 3166-1 alpha-3 lookup ──────────────────────────────────
+// Partial list covering the countries in our dataset + common ones
+function buildNumericToIso3() {
+  return {
+    4:'AFG',8:'ALB',12:'DZA',24:'AGO',32:'ARG',36:'AUS',40:'AUT',50:'BGD',
+    56:'BEL',64:'BTN',68:'BOL',76:'BRA',100:'BGR',104:'MMR',116:'KHM',120:'CMR',124:'CAN',
+    144:'LKA',152:'CHL',156:'CHN',170:'COL',180:'COD',188:'CRI',191:'HRV',
+    192:'CUB',196:'CYP',203:'CZE',204:'BEN',208:'DNK',218:'ECU',818:'EGY',
+    222:'SLV',231:'ETH',246:'FIN',250:'FRA',266:'GAB',276:'DEU',288:'GHA',
+    300:'GRC',320:'GTM',324:'GIN',332:'HTI',340:'HND',348:'HUN',356:'IND',
+    360:'IDN',364:'IRN',368:'IRQ',372:'IRL',376:'ISR',380:'ITA',388:'JAM',
+    392:'JPN',400:'JOR',398:'KAZ',404:'KEN',410:'KOR',414:'KWT',418:'LAO',
+    422:'LBN',430:'LBR',434:'LBY',484:'MEX',504:'MAR',508:'MOZ',516:'NAM',
+    524:'NPL',528:'NLD',554:'NZL',566:'NGA',558:'NIC',578:'NOR',512:'OMN',
+    586:'PAK',591:'PAN',600:'PRY',604:'PER',608:'PHL',616:'POL',620:'PRT',
+    630:'PRI',634:'QAT',642:'ROU',643:'RUS',682:'SAU',686:'SEN',694:'SLE',
+    706:'SOM',710:'ZAF',724:'ESP',728:'SSD',729:'SDN',752:'SWE',756:'CHE',
+    760:'SYR',764:'THA',792:'TUR',800:'UGA',804:'UKR',784:'ARE',826:'GBR',
+    840:'USA',858:'URY',862:'VEN',704:'VNM',887:'YEM',894:'ZMB',716:'ZWE',
+    // Additional
+    12:'DZA',44:'BHS',48:'BHR',52:'BRB',84:'BLZ',204:'BEN',60:'BMU',
+    96:'BRN',86:'IOT',226:'GNQ',232:'ERI',233:'EST',238:'FLK',
+    242:'FJI',254:'GUF',258:'PYF',260:'ATF',304:'GRL',312:'GLP',
+    316:'GUM',324:'GIN',328:'GUY',334:'HMD',336:'VAT',352:'ISL',
+    174:'COM',175:'MYT',178:'COG',184:'COK',248:'ALA',270:'GMB',
+    292:'GIB',296:'KIR',384:'CIV',388:'JAM',426:'LSO',428:'LVA',
+    440:'LTU',442:'LUX',446:'MAC',450:'MDG',454:'MWI',458:'MYS',
+    462:'MDV',466:'MLI',470:'MLT',474:'MTQ',478:'MRT',480:'MUS',
+    496:'MNG',498:'MDA',500:'MSR',516:'NAM',520:'NRU',531:'CUW',
+    533:'ABW',534:'SXM',535:'BES',540:'NCL',548:'VUT',570:'NIU',
+    574:'NFK',580:'MNP',581:'UMI',583:'FSM',584:'MHL',585:'PLW',
+    598:'PNG',626:'TLS',638:'REU',646:'RWA',652:'BLM',654:'SHN',
+    659:'KNA',660:'AIA',662:'LCA',666:'SPM',670:'VCT',674:'SMR',
+    678:'STP',690:'SYC',702:'SGP',703:'SVK',705:'SVN',706:'SOM',
+    740:'SUR',744:'SJM',748:'SWZ',762:'TJK',764:'THA',768:'TGO',
+    772:'TKL',776:'TON',780:'TTO',788:'TUN',795:'TKM',796:'TCA',
+    798:'TUV',834:'TZA',860:'UZB',876:'WLF',882:'WSM',887:'YEM',
+    894:'ZMB'
+  };
+}
+</script>
+</body>
+</html>
