@@ -64,7 +64,7 @@ Note: `irena_policy_tracker.html` is currently behind `index.html` — it does n
 ### Sheet column order (row 1 = headers, exact names required)
 
 ```
-id | country | iso3 | region | policy_name | sector | policy_type | date | quantitative_details | context
+id | country | iso3 | region | policy_name | sector | policy_type | date | quantitative_details | context | impacts
 ```
 
 ### Adding / editing / deleting entries
@@ -102,13 +102,14 @@ Each entry in `data.json`:
   "policy_type": "Existing Capacity",
   "date": "Ongoing March 2026",
   "quantitative_details": "60%+ electricity from renewables; wholesale prices €37–57/MWh",
-  "context": "Decades of RE investment now paying off as energy security shield"
+  "context": "Decades of RE investment now paying off as energy security shield",
+  "impacts": "Wholesale electricity prices 3–4× lower than gas-dependent neighbours"
 }
 ```
 
 Valid `region` values: `Africa` / `Americas` / `Asia-Pacific` / `Europe` / `International` / `Middle East`
 
-Valid `sector` values: `Biofuels` / `Conservation` / `Cross-cutting` / `Energy Efficiency` / `Grid / Storage` / `Hydro` / `Nuclear` / `Solar` / `Transport / EVs` / `Wind`
+Valid `sector` values: `Buildings` / `Cross-cutting` / `Industry` / `Power` / `Transport`
 
 Valid `policy_type` values: `Analysis` / `Emergency Measure` / `Existing Capacity` / `Financing / Strategy` / `Incentive` / `Infrastructure` / `Mandate / Regulation` / `Market Response` / `Target / Strategy`
 

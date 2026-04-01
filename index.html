@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Renewable Energy Policy Tracker — IRENA</title>
+  <title>Renewables Response Tracker — IRENA</title>
 
   <!-- D3.js + TopoJSON via CDN (replace with local copies for Sitecore) -->
   <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
@@ -12,12 +12,12 @@
   <style>
     /* ── IRENA design tokens ── */
     :root {
-      --irena-blue:       #003F73;
+      --irena-blue:       #0073AE;
       --irena-teal:       #00A3E0;
       --irena-teal-light: #E6F5FC;
       --irena-grey-bg:    #F5F5F5;
       --irena-grey-mid:   #D0D0D0;
-      --irena-grey-dark:  #555555;
+      --irena-grey-dark:  #5E5B5C;
       --irena-white:      #FFFFFF;
       --irena-red:        #C0392B;
       --irena-green:      #27AE60;
@@ -76,7 +76,7 @@
 
     /* ── Hero band ── */
     .hero {
-      background: linear-gradient(135deg, var(--irena-blue) 0%, #005A9E 100%);
+      background: linear-gradient(135deg, var(--irena-blue) 0%, #005A8C 100%);
       color: var(--irena-white);
       padding: 32px 24px;
     }
@@ -333,7 +333,7 @@
       position: sticky;
       top: 0;
     }
-    thead th:hover { background: #005A9E; }
+    thead th:hover { background: #005A8C; }
     thead th .sort-icon { margin-left: 4px; opacity: 0.5; }
     thead th.sort-asc .sort-icon::after  { content: " ▲"; }
     thead th.sort-desc .sort-icon::after { content: " ▼"; }
@@ -348,7 +348,7 @@
     tbody td.desc-cell .desc-short { display: block; }
     tbody td.desc-cell .desc-full  { display: none; }
 
-    /* ── Status badges ── */
+    /* ── Policy type badges ── */
     .badge {
       display: inline-block;
       padding: 3px 8px;
@@ -357,16 +357,32 @@
       font-weight: 600;
       white-space: nowrap;
     }
-    .badge-emergency    { background: #FDEDEC; color: #922B21; }
-    .badge-target       { background: #D6EAF8; color: #1A5276; }
-    .badge-market       { background: #D5F5E3; color: #1D6A36; }
-    .badge-existing     { background: #E8F8F5; color: #1A6B54; }
-    .badge-analysis     { background: #F4ECF7; color: #6C3483; }
-    .badge-mandate      { background: #FEF9E7; color: #9A6A00; }
-    .badge-infra        { background: #EAF2FF; color: #1B4F99; }
-    .badge-incentive    { background: #FEF5E7; color: #A04000; }
-    .badge-finance      { background: #EBF5FB; color: #1A5276; }
-    .badge-under-review { background: #FEF9E7; color: #9A6A00; }
+    .badge-emergency    { background: #B83318; color: #fff; }
+    .badge-target       { background: #0073AE; color: #fff; }
+    .badge-market       { background: #86BC25; color: #fff; }
+    .badge-existing     { background: #439ED8; color: #fff; }
+    .badge-analysis     { background: #6E398E; color: #fff; }
+    .badge-mandate      { background: #3A6BAA; color: #fff; }
+    .badge-infra        { background: #007A80; color: #fff; }
+    .badge-incentive    { background: #EE8700; color: #fff; }
+    .badge-finance      { background: #00A3E0; color: #fff; }
+    .badge-under-review { background: #8F8085; color: #fff; }
+
+    /* ── Sector badges (IRENA sector colours) ── */
+    .sector-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .sector-power     { background: #0073AE; color: #fff; }
+    .sector-buildings { background: #EE8700; color: #fff; }
+    .sector-transport { background: #007A80; color: #fff; }
+    .sector-industry  { background: #5B515C; color: #fff; }
+    .sector-cross     { background: #5E5B5C; color: #fff; }
+    .sector-default   { background: #B8A7AE; color: #333; }
 
     /* ── Source link ── */
     .source-link {
@@ -523,7 +539,7 @@
       <text x="0" y="44" font-family="Arial, sans-serif" font-weight="700" font-size="42" fill="white" letter-spacing="2">IRENA</text>
     </svg>
     <div class="header-divider"></div>
-    <div class="header-title">Renewable Energy Policy Tracker</div>
+    <div class="header-title">Renewables Response Tracker</div>
     <div class="header-updated" id="header-updated">Last updated: —</div>
   </div>
 </header>
@@ -531,7 +547,7 @@
 <!-- ── Hero ── -->
 <section class="hero">
   <div class="hero-inner">
-    <h1>Global Renewable Energy Policy Database</h1>
+    <h1>Renewables Response Tracker</h1>
     <p>Policy and market responses to the 2026 Iran war energy crisis — tracking emergency measures, structural RE acceleration, and clean energy investments across countries and multilateral organizations. Use the map and filters to explore by country, sector, and type.</p>
   </div>
 </section>
@@ -577,16 +593,11 @@
       <label>Sector</label>
       <select id="filter-sector">
         <option value="">All Sectors</option>
-        <option>Biofuels</option>
-        <option>Conservation</option>
+        <option>Buildings</option>
         <option>Cross-cutting</option>
-        <option>Energy Efficiency</option>
-        <option>Grid / Storage</option>
-        <option>Hydro</option>
-        <option>Nuclear</option>
-        <option>Solar</option>
-        <option>Transport / EVs</option>
-        <option>Wind</option>
+        <option>Industry</option>
+        <option>Power</option>
+        <option>Transport</option>
       </select>
     </div>
     <div class="filter-group">
@@ -633,8 +644,8 @@
       <div class="legend-item"><div class="legend-swatch" style="background:#D0D0D0"></div> 0</div>
       <div class="legend-item"><div class="legend-swatch" style="background:#B8DFF5"></div> 1–2</div>
       <div class="legend-item"><div class="legend-swatch" style="background:#5AB8E8"></div> 3–5</div>
-      <div class="legend-item"><div class="legend-swatch" style="background:#0073B7"></div> 6–9</div>
-      <div class="legend-item"><div class="legend-swatch" style="background:#003F73"></div> 10+</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#0073AE"></div> 6–9</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#005A8C"></div> 10+</div>
       <div style="margin-left:20px" class="legend-item"><div class="legend-swatch" style="background:#E0F4FD;border:2px solid #00A3E0"></div> Selected</div>
     </div>
   </div>
@@ -668,6 +679,7 @@
             <th data-col="policy_type">Type<span class="sort-icon"></span></th>
             <th data-col="date">Date<span class="sort-icon"></span></th>
             <th>Key Details</th>
+            <th>Impacts</th>
           </tr>
         </thead>
         <tbody id="table-body"></tbody>
@@ -704,8 +716,8 @@ const COLOR_SCALE = [
   { min: 0,  max: 0,  color: '#D0D0D0' },
   { min: 1,  max: 2,  color: '#B8DFF5' },
   { min: 3,  max: 5,  color: '#5AB8E8' },
-  { min: 6,  max: 9,  color: '#0073B7' },
-  { min: 10, max: Infinity, color: '#003F73' }
+  { min: 6,  max: 9,  color: '#0073AE' },
+  { min: 10, max: Infinity, color: '#005A8C' }
 ];
 
 function policyColor(count) {
@@ -727,6 +739,17 @@ function typeBadgeClass(t) {
     case 'Incentive':           return 'badge-incentive';
     case 'Financing / Strategy':return 'badge-finance';
     default:                    return 'badge-analysis';
+  }
+}
+
+function sectorBadgeClass(s) {
+  switch (s) {
+    case 'Power':        return 'sector-power';
+    case 'Buildings':    return 'sector-buildings';
+    case 'Transport':    return 'sector-transport';
+    case 'Industry':     return 'sector-industry';
+    case 'Cross-cutting':return 'sector-cross';
+    default:             return 'sector-default';
   }
 }
 
@@ -940,7 +963,7 @@ function applyFilters() {
     if (sector && p.sector !== sector)                                 return false;
     if (type   && p.policy_type !== type)                              return false;
     if (search) {
-      const haystack = [p.country, p.policy_name, p.sector, p.policy_type, p.quantitative_details, p.context, p.date].join(' ').toLowerCase();
+      const haystack = [p.country, p.policy_name, p.sector, p.policy_type, p.quantitative_details, p.context, p.date, p.impacts].join(' ').toLowerCase();
       if (!haystack.includes(search)) return false;
     }
     if (state.selectedCountry && p.iso3 !== state.selectedCountry)    return false;
@@ -989,10 +1012,11 @@ function renderTable() {
       <td class="country-cell">${esc(p.country)}</td>
       <td>${esc(p.region)}</td>
       <td><strong>${esc(p.policy_name)}</strong>${p.context ? `<div class="ctx-wrap"><button class="ctx-btn" data-action="toggle-ctx">▸ context</button><div class="ctx-body">${esc(p.context)}</div></div>` : ''}</td>
-      <td>${esc(p.sector)}</td>
+      <td><span class="sector-badge ${sectorBadgeClass(p.sector)}">${esc(p.sector)}</span></td>
       <td><span class="badge ${typeBadgeClass(p.policy_type)}">${esc(p.policy_type)}</span></td>
       <td style="white-space:nowrap;font-size:12px;color:#555">${esc(p.date)}</td>
       <td class="desc-cell">${esc(p.quantitative_details)}</td>
+      <td class="desc-cell">${esc(p.impacts || '')}</td>
     </tr>
   `).join('');
 

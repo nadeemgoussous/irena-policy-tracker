@@ -24,7 +24,7 @@ DATA_FILE = "data.json"
 
 REQUIRED_COLUMNS = [
     "country", "iso3", "region", "policy_name",
-    "sector", "policy_type", "date", "quantitative_details", "context"
+    "sector", "policy_type", "date", "quantitative_details", "context", "impacts"
 ]
 
 
@@ -56,6 +56,7 @@ def parse_policies(csv_text):
             "date": row["date"].strip(),
             "quantitative_details": row["quantitative_details"].strip(),
             "context": row["context"].strip(),
+            "impacts": row.get("impacts", "").strip(),
         }
         policies.append(policy)
     return policies
