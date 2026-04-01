@@ -8,8 +8,13 @@ Outputs:
     policies_for_sheets.csv  — open in Excel/Sheets or File > Import in Google Sheets
 
 Column order matches what sync_from_sheets.py expects:
-    id, country, iso3, region, policy_name, sector, policy_type,
-    date, quantitative_details, impacts, description, source_url
+    id, country, iso3, region, measure_name, pillar, technology_focus,
+    measure_type, crisis_response_typology, date, quantifiable_targets,
+    impact_assessment, measure_description, observed_expected_impact, source_url
+
+NOTE: This script migrates old-schema data.json fields to the new ECTT schema.
+      New fields (pillar, crisis_response_typology, impact_assessment, etc.) are
+      populated with placeholder values — fill them in Google Sheets before syncing.
 """
 
 import csv
@@ -19,10 +24,45 @@ DATA_FILE = "data.json"
 OUTPUT_FILE = "policies_for_sheets.csv"
 
 COLUMNS = [
-    "id", "country", "iso3", "region", "policy_name",
-    "sector", "policy_type", "date", "quantitative_details", "impacts",
-    "description", "source_url"
+    "id", "country", "iso3", "region",
+    "measure_name", "pillar", "technology_focus", "measure_type",
+    "crisis_response_typology", "date", "quantifiable_targets",
+    "impact_assessment", "measure_description", "observed_expected_impact",
+    "source_url"
 ]
+
+# Best-effort mapping from old sector values to new Pillar values.
+# These are approximate — review and correct in Google Sheets.
+SECTOR_TO_PILLAR = {
+    "Power":        "Renewable Energy",
+    "Transport":    "Electrification",
+    "Buildings":    "Electrification",
+    "Industry":     "Infrastructure",
+    "Cross-cutting":"Renewable Energy",
+}
+
+
+def migrate(p):
+    """Map an old-schema policy record to the new ECTT schema."""
+    return {
+        "id":                      p.get("id", ""),
+        "country":                 p.get("country", ""),
+        "iso3":                    p.get("iso3", ""),
+        "region":                  p.get("region", ""),
+        # Renamed fields
+        "measure_name":            p.get("measure_name") or p.get("policy_name", ""),
+        "pillar":                  p.get("pillar") or SECTOR_TO_PILLAR.get(p.get("sector", ""), ""),
+        "technology_focus":        p.get("technology_focus", ""),
+        "measure_type":            p.get("measure_type") or p.get("policy_type", ""),
+        # New fields — placeholder for manual entry in Sheets
+        "crisis_response_typology":p.get("crisis_response_typology", ""),
+        "date":                    p.get("date", ""),
+        "quantifiable_targets":    p.get("quantifiable_targets") or p.get("quantitative_details", ""),
+        "impact_assessment":       p.get("impact_assessment", ""),
+        "measure_description":     p.get("measure_description") or p.get("description", ""),
+        "observed_expected_impact":p.get("observed_expected_impact") or p.get("impacts", ""),
+        "source_url":              p.get("source_url", ""),
+    }
 
 
 def main():
@@ -30,23 +70,31 @@ def main():
         data = json.load(f)
 
     policies = data.get("policies", [])
+    rows = [migrate(p) for p in policies]
 
     with open(OUTPUT_FILE, "w", newline="", encoding="utf-8-sig") as f:
         # utf-8-sig adds BOM so Excel opens it correctly without garbling special chars
         writer = csv.DictWriter(f, fieldnames=COLUMNS, extrasaction="ignore")
         writer.writeheader()
-        writer.writerows(policies)
+        writer.writerows(rows)
 
-    print(f"Exported {len(policies)} rows to {OUTPUT_FILE}")
+    empty_pillar = sum(1 for r in rows if not r["pillar"])
+    empty_typology = sum(1 for r in rows if not r["crisis_response_typology"])
+
+    print(f"Exported {len(rows)} rows to {OUTPUT_FILE}")
+    print()
+    if empty_pillar:
+        print(f"  WARNING: {empty_pillar} rows have no Pillar value -- fill in Google Sheets")
+    if empty_typology:
+        print(f"  WARNING: {empty_typology} rows need a Crisis Response Typology (Accelerated Pivot / Pre-Existing Buffer)")
     print()
     print("Next steps:")
     print("  1. Go to your Google Sheet")
     print("  2. File > Import > Upload > select policies_for_sheets.csv")
     print("  3. Choose 'Replace current sheet' and 'No' to convert numbers")
-    print("  4. Publish: File > Share > Publish to web > Sheet1 > CSV > Publish")
-    print("  5. Copy the published CSV URL")
-    print("  6. Add it as a repo variable: GitHub repo > Settings > Secrets and variables")
-    print("     > Variables > New repository variable > Name: SHEETS_CSV_URL")
+    print("  4. Fill in 'crisis_response_typology' and review 'pillar' for each row")
+    print("  5. Publish: File > Share > Publish to web > Sheet1 > CSV > Publish")
+    print("  6. Copy the published CSV URL and set it as the SHEETS_CSV_URL repo variable")
 
 
 if __name__ == "__main__":

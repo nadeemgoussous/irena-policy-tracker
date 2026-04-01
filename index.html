@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Renewables Response Tracker — IRENA</title>
+  <title>Energy Crisis Transition Tracker — IRENA</title>
 
   <!-- D3.js + TopoJSON via CDN (replace with local copies for Sitecore) -->
   <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
@@ -19,10 +19,6 @@
       --irena-grey-mid:   #D0D0D0;
       --irena-grey-dark:  #5E5B5C;
       --irena-white:      #FFFFFF;
-      --irena-red:        #C0392B;
-      --irena-green:      #27AE60;
-      --irena-orange:     #E67E22;
-      --irena-yellow:     #F1C40F;
       --max-width:        1316px;
       --radius:           4px;
       --shadow:           0 2px 8px rgba(0,0,0,0.10);
@@ -52,27 +48,10 @@
       gap: 24px;
       height: 64px;
     }
-    .header-logo {
-      height: 36px;
-      width: auto;
-      flex-shrink: 0;
-    }
-    .header-divider {
-      width: 1px;
-      height: 32px;
-      background: rgba(255,255,255,0.3);
-    }
-    .header-title {
-      font-size: 18px;
-      font-weight: 600;
-      letter-spacing: 0.01em;
-      flex: 1;
-    }
-    .header-updated {
-      font-size: 12px;
-      color: rgba(255,255,255,0.65);
-      white-space: nowrap;
-    }
+    .header-logo { height: 36px; width: auto; flex-shrink: 0; }
+    .header-divider { width: 1px; height: 32px; background: rgba(255,255,255,0.3); }
+    .header-title { font-size: 18px; font-weight: 600; letter-spacing: 0.01em; flex: 1; }
+    .header-updated { font-size: 12px; color: rgba(255,255,255,0.65); white-space: nowrap; }
 
     /* ── Hero band ── */
     .hero {
@@ -80,35 +59,15 @@
       color: var(--irena-white);
       padding: 32px 24px;
     }
-    .hero-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-    }
-    .hero h1 {
-      font-size: 26px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .hero p {
-      font-size: 14px;
-      color: rgba(255,255,255,0.80);
-      max-width: 720px;
-    }
+    .hero-inner { max-width: var(--max-width); margin: 0 auto; }
+    .hero h1 { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+    .hero p { font-size: 14px; color: rgba(255,255,255,0.80); max-width: 720px; }
 
     /* ── Main wrapper ── */
-    .wrapper {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 24px;
-    }
+    .wrapper { max-width: var(--max-width); margin: 0 auto; padding: 24px; }
 
     /* ── Stats bar ── */
-    .stats-bar {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
+    .stats-bar { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
     .stat-card {
       background: var(--irena-white);
       border-radius: var(--radius);
@@ -118,19 +77,8 @@
       min-width: 140px;
       border-top: 3px solid var(--irena-teal);
     }
-    .stat-card .stat-value {
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--irena-blue);
-      line-height: 1;
-    }
-    .stat-card .stat-label {
-      font-size: 11px;
-      color: var(--irena-grey-dark);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-top: 4px;
-    }
+    .stat-card .stat-value { font-size: 28px; font-weight: 700; color: var(--irena-blue); line-height: 1; }
+    .stat-card .stat-label { font-size: 11px; color: var(--irena-grey-dark); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
 
     /* ── Filter panel ── */
     .filters {
@@ -144,20 +92,8 @@
       align-items: flex-end;
       flex-wrap: wrap;
     }
-    .filter-group {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      flex: 1;
-      min-width: 140px;
-    }
-    .filter-group label {
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--irena-grey-dark);
-    }
+    .filter-group { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 140px; }
+    .filter-group label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--irena-grey-dark); }
     .filter-group select,
     .filter-group input {
       border: 1px solid var(--irena-grey-mid);
@@ -172,9 +108,7 @@
       transition: border-color .15s;
     }
     .filter-group select:focus,
-    .filter-group input:focus {
-      border-color: var(--irena-teal);
-    }
+    .filter-group input:focus { border-color: var(--irena-teal); }
     .filter-group.search-group { flex: 2; min-width: 200px; }
     .filter-group.search-group input { padding-left: 32px; }
     .search-wrap { position: relative; }
@@ -211,41 +145,13 @@
       padding: 20px;
       margin-bottom: 20px;
     }
-    .map-card h2 {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--irena-blue);
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .map-card h2 span.map-note {
-      font-size: 11px;
-      font-weight: 400;
-      color: var(--irena-grey-dark);
-    }
-    #map-container {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-    }
-    #map-svg {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    .country-path {
-      stroke: #fff;
-      stroke-width: 0.5px;
-      cursor: pointer;
-      transition: opacity .15s;
-    }
+    .map-card h2 { font-size: 15px; font-weight: 600; color: var(--irena-blue); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+    .map-card h2 span.map-note { font-size: 11px; font-weight: 400; color: var(--irena-grey-dark); }
+    #map-container { position: relative; width: 100%; overflow: hidden; }
+    #map-svg { width: 100%; height: auto; display: block; }
+    .country-path { stroke: #fff; stroke-width: 0.5px; cursor: pointer; transition: opacity .15s; }
     .country-path:hover { opacity: 0.8; }
-    .country-path.selected {
-      stroke: var(--irena-teal);
-      stroke-width: 2px;
-    }
+    .country-path.selected { stroke: var(--irena-teal); stroke-width: 2px; }
 
     /* ── Tooltip ── */
     #tooltip {
@@ -264,35 +170,13 @@
     #tooltip strong { display: block; font-size: 13px; }
 
     /* ── Legend ── */
-    .map-legend {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-wrap: wrap;
-      margin-top: 12px;
-    }
+    .map-legend { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
     .legend-label { font-size: 11px; color: var(--irena-grey-dark); margin-right: 4px; }
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 11px;
-      color: var(--irena-grey-dark);
-    }
-    .legend-swatch {
-      width: 16px;
-      height: 12px;
-      border-radius: 2px;
-      border: 1px solid rgba(0,0,0,0.1);
-    }
+    .legend-item { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--irena-grey-dark); }
+    .legend-swatch { width: 16px; height: 12px; border-radius: 2px; border: 1px solid rgba(0,0,0,0.1); }
 
     /* ── Table card ── */
-    .table-card {
-      background: var(--irena-white);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 20px;
-    }
+    .table-card { background: var(--irena-white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px; }
     .table-header-row {
       display: flex;
       align-items: center;
@@ -301,25 +185,11 @@
       flex-wrap: wrap;
       gap: 8px;
     }
-    .table-header-row h2 {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--irena-blue);
-    }
-    .table-count {
-      font-size: 12px;
-      color: var(--irena-grey-dark);
-    }
+    .table-header-row h2 { font-size: 15px; font-weight: 600; color: var(--irena-blue); }
+    .table-count { font-size: 12px; color: var(--irena-grey-dark); }
     .table-count strong { color: var(--irena-blue); }
-
-    .table-wrap {
-      overflow-x: auto;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-    }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
     thead th {
       background: var(--irena-blue);
       color: var(--irena-white);
@@ -338,17 +208,50 @@
     thead th.sort-asc .sort-icon::after  { content: " ▲"; }
     thead th.sort-desc .sort-icon::after { content: " ▼"; }
     thead th:not(.sort-asc):not(.sort-desc) .sort-icon::after { content: " ⇅"; }
+    thead th.no-sort { cursor: default; }
+    thead th.no-sort:hover { background: var(--irena-blue); }
 
     tbody tr { border-bottom: 1px solid #EEE; transition: background .1s; cursor: pointer; }
     tbody tr:hover { background: var(--irena-teal-light); }
     tbody tr.highlighted { background: #E0F4FD; }
     tbody td { padding: 10px 12px; vertical-align: top; }
     tbody td.country-cell { font-weight: 600; white-space: nowrap; }
-    tbody td.desc-cell { max-width: 300px; color: var(--irena-grey-dark); }
-    tbody td.desc-cell .desc-short { display: block; }
-    tbody td.desc-cell .desc-full  { display: none; }
+    tbody td.desc-cell { max-width: 260px; color: var(--irena-grey-dark); font-size: 12px; }
 
-    /* ── Policy type badges ── */
+    /* ── Pillar badges ── */
+    .pillar-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .pillar-re       { background: #E6F5FC; color: #006A96; border: 1px solid #00A3E0; }
+    .pillar-elec     { background: #E8F5E9; color: #1B7A3F; border: 1px solid #28a745; }
+    .pillar-infra    { background: #EEF2FA; color: #2C4E8A; border: 1px solid #3A6BAA; }
+    .pillar-finance  { background: #F0F7E6; color: #4A6B10; border: 1px solid #86BC25; }
+    .pillar-analysis { background: #F3EEF8; color: #5A2B7D; border: 1px solid #6E398E; }
+    .pillar-default  { background: #F5F5F5; color: #555; border: 1px solid #ccc; }
+
+    /* ── Response Typology badges ── */
+    .typology-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .typology-pivot   { background: #28a745; color: #fff; }
+    .typology-buffer  { background: #0073AE; color: #fff; }
+    .typology-default { background: #8F8085; color: #fff; }
+
+    /* ── Measure Type badges — used in modal metadata ── */
     .badge {
       display: inline-block;
       padding: 3px 8px;
@@ -368,32 +271,20 @@
     .badge-finance      { background: #00A3E0; color: #fff; }
     .badge-under-review { background: #8F8085; color: #fff; }
 
-    /* ── Sector badges (IRENA sector colours) ── */
-    .sector-badge {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 3px;
-      font-size: 11px;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-    .sector-power     { background: #0073AE; color: #fff; }
-    .sector-buildings { background: #EE8700; color: #fff; }
-    .sector-transport { background: #007A80; color: #fff; }
-    .sector-industry  { background: #5B515C; color: #fff; }
-    .sector-cross     { background: #5E5B5C; color: #fff; }
-    .sector-default   { background: #B8A7AE; color: #333; }
-
-    /* ── Source link ── */
-    .source-link {
+    /* ── View Details button ── */
+    .btn-view-details {
+      background: none;
+      border: 1px solid var(--irena-teal);
+      border-radius: var(--radius);
       color: var(--irena-teal);
-      text-decoration: none;
       font-size: 12px;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
+      padding: 5px 10px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all .15s;
+      min-height: 32px;
     }
-    .source-link:hover { text-decoration: underline; }
+    .btn-view-details:hover { background: var(--irena-teal); color: #fff; }
 
     /* ── Pagination ── */
     .pagination {
@@ -422,7 +313,7 @@
     .page-btn.active { background: var(--irena-blue); border-color: var(--irena-blue); color: #fff; }
     .page-btn:disabled { opacity: 0.4; cursor: default; }
 
-    /* ── Selected country strip ── */
+    /* ── Selected country/org strip ── */
     .active-country-bar {
       display: none;
       background: var(--irena-teal-light);
@@ -474,14 +365,7 @@
       padding: 16px 20px;
       margin-bottom: 20px;
     }
-    .org-panel h2 {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--irena-blue);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 12px;
-    }
+    .org-panel h2 { font-size: 13px; font-weight: 600; color: var(--irena-blue); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; }
     .org-chips { display: flex; flex-wrap: wrap; gap: 8px; }
     .org-chip {
       background: var(--irena-grey-bg);
@@ -498,12 +382,7 @@
     }
     .org-chip:hover { border-color: var(--irena-teal); color: var(--irena-teal); }
     .org-chip.active { background: var(--irena-blue); border-color: var(--irena-blue); color: #fff; }
-    .org-count {
-      background: rgba(0,0,0,0.1);
-      border-radius: 10px;
-      padding: 1px 6px;
-      font-size: 11px;
-    }
+    .org-count { background: rgba(0,0,0,0.1); border-radius: 10px; padding: 1px 6px; font-size: 11px; }
     .org-chip.active .org-count { background: rgba(255,255,255,0.25); }
 
     /* ── Modal ── */
@@ -522,7 +401,7 @@
       background: var(--irena-white);
       border-radius: var(--radius);
       box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-      max-width: min(660px, calc(100vw - 40px));
+      max-width: min(700px, calc(100vw - 40px));
       width: 100%;
       min-width: 0;
       max-height: 88vh;
@@ -536,10 +415,10 @@
       padding: 20px 48px 20px 24px;
       position: sticky;
       top: 0;
+      z-index: 1;
     }
-    .modal-header h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; line-height: 1.3; word-break: break-word; overflow-wrap: break-word; pointer-events: none; }
-    .modal-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; pointer-events: none; }
-    .modal-meta { font-size: 12px; color: rgba(255,255,255,0.70); pointer-events: none; }
+    .modal-header h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; line-height: 1.3; word-break: break-word; overflow-wrap: break-word; pointer-events: none; }
+    .modal-meta { font-size: 13px; color: rgba(255,255,255,0.75); pointer-events: none; }
     .modal-close {
       position: absolute;
       top: 14px;
@@ -554,18 +433,50 @@
       z-index: 1;
     }
     .modal-close:hover { color: #fff; }
-    .modal-body { padding: 20px 24px; display: flex; flex-direction: column; gap: 14px; }
-    .modal-section label {
-      display: block;
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--irena-grey-dark);
-      margin-bottom: 4px;
+    .modal-body { padding: 0 24px 4px; display: flex; flex-direction: column; }
+
+    /* Modal metadata tags row */
+    .modal-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid #EEE;
     }
+    .modal-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; }
+    .modal-tag-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--irena-grey-dark); }
+
+    /* Modal classification grid */
+    .modal-classification {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-bottom: 1px solid #EEE;
+    }
+    .modal-classification .modal-section { border-bottom: none; }
+    @media (max-width: 480px) {
+      .modal-classification { grid-template-columns: 1fr; }
+    }
+
+    /* Modal quantitative callout */
+    .quant-callout {
+      background: linear-gradient(135deg, var(--irena-blue) 0%, #005A8C 100%);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-top: 8px;
+    }
+
+    /* Modal section */
+    .modal-section { padding: 14px 0; border-bottom: 1px solid #EEE; }
+    .modal-section:last-child { border-bottom: none; }
+    .modal-section label { display: block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--irena-grey-dark); margin-bottom: 6px; }
     .modal-section p { font-size: 13px; line-height: 1.6; color: #333; word-break: break-word; overflow-wrap: break-word; }
-    .modal-section p.italic { font-style: italic; color: #555; }
+
     .modal-footer {
       padding: 14px 24px;
       border-top: 1px solid #EEE;
@@ -609,11 +520,10 @@
 <header class="header">
   <div class="header-inner">
     <svg class="header-logo" viewBox="0 0 260 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="IRENA">
-      <!-- Simplified IRENA wordmark in white -->
       <text x="0" y="44" font-family="Arial, sans-serif" font-weight="700" font-size="42" fill="white" letter-spacing="2">IRENA</text>
     </svg>
     <div class="header-divider"></div>
-    <div class="header-title">Renewables Response Tracker</div>
+    <div class="header-title">Energy Crisis Transition Tracker</div>
     <div class="header-updated" id="header-updated">Last updated: —</div>
   </div>
 </header>
@@ -621,8 +531,8 @@
 <!-- ── Hero ── -->
 <section class="hero">
   <div class="hero-inner">
-    <h1>Renewables Response Tracker</h1>
-    <p>Policy and market responses to the 2026 Iran war energy crisis — tracking emergency measures, structural RE acceleration, and clean energy investments across countries and multilateral organizations. Use the map and filters to explore by country, sector, and type.</p>
+    <h1>Energy Crisis Transition Tracker (ECTT)</h1>
+    <p>Tracking national and multilateral responses to the 2026 Iran war energy crisis — renewable energy pivots, electrification accelerations, infrastructure investments, and strategic buffers across countries and international organizations.</p>
   </div>
 </section>
 
@@ -641,11 +551,11 @@
     </div>
     <div class="stat-card">
       <div class="stat-value" id="stat-emergency">—</div>
-      <div class="stat-label">Emergency Measures</div>
+      <div class="stat-label">Accelerated Pivots</div>
     </div>
     <div class="stat-card">
       <div class="stat-value" id="stat-sectors">—</div>
-      <div class="stat-label">Sectors</div>
+      <div class="stat-label">Pillars</div>
     </div>
   </div>
 
@@ -664,35 +574,28 @@
       </select>
     </div>
     <div class="filter-group">
-      <label>Sector</label>
-      <select id="filter-sector">
-        <option value="">All Sectors</option>
-        <option>Buildings</option>
-        <option>Cross-cutting</option>
-        <option>Industry</option>
-        <option>Power</option>
-        <option>Transport</option>
+      <label>Pillar</label>
+      <select id="filter-pillar">
+        <option value="">All Pillars</option>
+        <option>Renewable Energy</option>
+        <option>Electrification</option>
+        <option>Infrastructure</option>
+        <option>Finance &amp; Investment</option>
+        <option>Analysis</option>
       </select>
     </div>
     <div class="filter-group">
-      <label>Policy Type</label>
-      <select id="filter-type">
-        <option value="">All Types</option>
-        <option>Analysis</option>
-        <option>Emergency Measure</option>
-        <option>Existing Capacity</option>
-        <option>Financing / Strategy</option>
-        <option>Incentive</option>
-        <option>Infrastructure</option>
-        <option>Mandate / Regulation</option>
-        <option>Market Response</option>
-        <option>Target / Strategy</option>
+      <label>Response Typology</label>
+      <select id="filter-typology">
+        <option value="">All Typologies</option>
+        <option>Accelerated Pivot</option>
+        <option>Pre-Existing Buffer</option>
       </select>
     </div>
     <div class="filter-group search-group">
       <label>Search</label>
       <div class="search-wrap">
-        <input type="text" id="filter-search" placeholder="Country or policy name…">
+        <input type="text" id="filter-search" placeholder="Country or measure name…">
       </div>
     </div>
     <button class="btn-clear" id="btn-clear">✕ Clear</button>
@@ -713,6 +616,7 @@
     <div id="map-container">
       <svg id="map-svg" viewBox="0 0 960 480" preserveAspectRatio="xMidYMid meet"></svg>
     </div>
+    <p style="font-size:11px;color:var(--irena-grey-dark);margin-top:10px;line-height:1.5;font-style:italic;">The geographic designations and presentation of data on this map are for informational purposes only. They do not imply the expression of any opinion on the part of IRENA concerning the legal status of any country, territory, or area, nor the delimitation of its frontiers or boundaries.</p>
     <div class="map-legend">
       <span class="legend-label">Measures:</span>
       <div class="legend-item"><div class="legend-swatch" style="background:#D0D0D0"></div> 0</div>
@@ -739,21 +643,21 @@
   <!-- Table -->
   <div class="table-card">
     <div class="table-header-row">
-      <h2>Policy &amp; Measure Details</h2>
+      <h2>Measure Details</h2>
       <span class="table-count" id="table-count"></span>
     </div>
     <div class="table-wrap">
       <table id="policy-table">
         <thead>
           <tr>
-            <th data-col="country">Country / Org<span class="sort-icon"></span></th>
+            <th data-col="country">Country<span class="sort-icon"></span></th>
             <th data-col="region">Region<span class="sort-icon"></span></th>
-            <th data-col="policy_name">Policy / Measure<span class="sort-icon"></span></th>
-            <th data-col="sector">Sector<span class="sort-icon"></span></th>
-            <th data-col="policy_type">Type<span class="sort-icon"></span></th>
-            <th data-col="date">Date<span class="sort-icon"></span></th>
-            <th>Key Details</th>
-            <th>Impacts</th>
+            <th data-col="measure_name">Measure Name<span class="sort-icon"></span></th>
+            <th class="no-sort">Measure Description</th>
+            <th data-col="pillar">Pillar<span class="sort-icon"></span></th>
+            <th data-col="crisis_response_typology">Response Typology<span class="sort-icon"></span></th>
+            <th class="no-sort">Impact Assessment</th>
+            <th class="no-sort">Details</th>
           </tr>
         </thead>
         <tbody id="table-body"></tbody>
@@ -769,7 +673,6 @@
     <div class="modal-header">
       <button class="modal-close" id="modal-close" title="Close">✕</button>
       <h3 id="modal-title"></h3>
-      <div class="modal-badges" id="modal-badges"></div>
       <div class="modal-meta" id="modal-meta"></div>
     </div>
     <div class="modal-body" id="modal-body"></div>
@@ -788,16 +691,16 @@
 <script>
 // ── State ──────────────────────────────────────────────────────────────────
 const state = {
-  allPolicies:     [],
-  filtered:        [],
-  selectedCountry: null,
-  selectedOrg:     null,
-  sortCol:         'country',
-  sortDir:         'asc',
-  page:            1,
-  pageSize:        25,
+  allPolicies:         [],
+  filtered:            [],
+  selectedCountry:     null,
+  selectedOrg:         null,
+  sortCol:             'country',
+  sortDir:             'asc',
+  page:                1,
+  pageSize:            25,
   countryPolicyCounts: {},
-  iso3ToName:      {}
+  iso3ToName:          {}
 };
 
 const COLOR_SCALE = [
@@ -815,29 +718,56 @@ function policyColor(count) {
   return '#D0D0D0';
 }
 
-function typeBadgeClass(t) {
-  switch (t) {
-    case 'Emergency Measure':   return 'badge-emergency';
-    case 'Target / Strategy':   return 'badge-target';
-    case 'Market Response':     return 'badge-market';
-    case 'Existing Capacity':   return 'badge-existing';
-    case 'Analysis':            return 'badge-analysis';
-    case 'Mandate / Regulation':return 'badge-mandate';
-    case 'Infrastructure':      return 'badge-infra';
-    case 'Incentive':           return 'badge-incentive';
-    case 'Financing / Strategy':return 'badge-finance';
-    default:                    return 'badge-analysis';
+function pillarBadgeClass(p) {
+  switch (p) {
+    case 'Renewable Energy':    return 'pillar-re';
+    case 'Electrification':     return 'pillar-elec';
+    case 'Infrastructure':      return 'pillar-infra';
+    case 'Finance & Investment':return 'pillar-finance';
+    case 'Analysis':            return 'pillar-analysis';
+    default:                    return 'pillar-default';
   }
 }
 
-function sectorBadgeClass(s) {
-  switch (s) {
-    case 'Power':        return 'sector-power';
-    case 'Buildings':    return 'sector-buildings';
-    case 'Transport':    return 'sector-transport';
-    case 'Industry':     return 'sector-industry';
-    case 'Cross-cutting':return 'sector-cross';
-    default:             return 'sector-default';
+function pillarEmoji(p) {
+  switch (p) {
+    case 'Renewable Energy':    return '☀️';
+    case 'Electrification':     return '⚡';
+    case 'Infrastructure':      return '🏗️';
+    case 'Finance & Investment':return '💰';
+    case 'Analysis':            return '📊';
+    default:                    return '';
+  }
+}
+
+function typologyBadgeClass(t) {
+  switch (t) {
+    case 'Accelerated Pivot':   return 'typology-pivot';
+    case 'Pre-Existing Buffer': return 'typology-buffer';
+    default:                    return 'typology-default';
+  }
+}
+
+function typologyEmoji(t) {
+  switch (t) {
+    case 'Accelerated Pivot':   return '🟢';
+    case 'Pre-Existing Buffer': return '🔵';
+    default:                    return '';
+  }
+}
+
+function typeBadgeClass(t) {
+  switch (t) {
+    case 'Emergency Measure':    return 'badge-emergency';
+    case 'Target / Strategy':    return 'badge-target';
+    case 'Market Response':      return 'badge-market';
+    case 'Existing Capacity':    return 'badge-existing';
+    case 'Analysis':             return 'badge-analysis';
+    case 'Mandate / Regulation': return 'badge-mandate';
+    case 'Infrastructure':       return 'badge-infra';
+    case 'Incentive':            return 'badge-incentive';
+    case 'Financing / Strategy': return 'badge-finance';
+    default:                     return 'badge-analysis';
   }
 }
 
@@ -855,49 +785,37 @@ async function init() {
 
   state.allPolicies = data.policies;
 
-  // Last updated
-  document.getElementById('header-updated').textContent = 'Last updated: ' + data.last_updated;
+  if (data.last_updated) {
+    document.getElementById('header-updated').textContent = 'Last updated: ' + data.last_updated;
+  }
 
   // Stats
   document.getElementById('stat-total').textContent     = data.policies.length;
   document.getElementById('stat-countries').textContent = new Set(data.policies.map(p => p.iso3)).size;
-  document.getElementById('stat-emergency').textContent = data.policies.filter(p => p.policy_type === 'Emergency Measure').length;
-  document.getElementById('stat-sectors').textContent   = new Set(data.policies.map(p => p.sector)).size;
+  document.getElementById('stat-emergency').textContent = data.policies.filter(p => p.crisis_response_typology === 'Accelerated Pivot').length;
+  document.getElementById('stat-sectors').textContent   = new Set(data.policies.map(p => p.pillar).filter(Boolean)).size;
 
-  // Draw map
   drawMap(world);
   renderOrgPanel();
-
-  // Initial render
   applyFilters();
 }
 
 // ── Map ──────────────────────────────────────────────────────────────────────
 function drawMap(world) {
-  const svg       = d3.select('#map-svg');
-  const projection = d3.geoNaturalEarth1()
-    .scale(153)
-    .translate([480, 240]);
-  const path = d3.geoPath().projection(projection);
-
-  const countries = topojson.feature(world, world.objects.countries);
-
-  // Build iso3 lookup from numeric code
-  // TopoJSON from world-atlas uses ISO 3166-1 numeric IDs
-  // We map those to iso3 via the data itself + a small embedded lookup
+  const svg        = d3.select('#map-svg');
+  const projection = d3.geoNaturalEarth1().scale(153).translate([480, 240]);
+  const path       = d3.geoPath().projection(projection);
+  const countries  = topojson.feature(world, world.objects.countries);
   const NUM_TO_ISO3 = buildNumericToIso3();
 
-  // Build name lookup from iso3
   countries.features.forEach(f => {
     const iso3 = NUM_TO_ISO3[f.id];
     if (iso3) {
-      // find matching policy country name
       const match = state.allPolicies.find(p => p.iso3 === iso3);
       if (match) state.iso3ToName[iso3] = match.country;
     }
   });
 
-  // Render globe outline
   svg.append('path')
     .datum({ type: 'Sphere' })
     .attr('d', path)
@@ -905,7 +823,6 @@ function drawMap(world) {
     .attr('stroke', '#BFD9EC')
     .attr('stroke-width', 0.5);
 
-  // Graticule
   svg.append('path')
     .datum(d3.geoGraticule()())
     .attr('d', path)
@@ -913,13 +830,12 @@ function drawMap(world) {
     .attr('stroke', '#D5E8F5')
     .attr('stroke-width', 0.3);
 
-  // Countries
   svg.selectAll('.country-path')
     .data(countries.features)
     .join('path')
       .attr('class', 'country-path')
       .attr('d', path)
-      .attr('data-id', d => d.id)
+      .attr('data-id',   d => d.id)
       .attr('data-iso3', d => NUM_TO_ISO3[d.id] || '')
       .attr('fill', d => {
         const iso3 = NUM_TO_ISO3[d.id];
@@ -927,11 +843,11 @@ function drawMap(world) {
         return policyColor(cnt);
       })
     .on('mouseover', function(event, d) {
-      const iso3   = NUM_TO_ISO3[d.id];
-      const cname  = iso3 ? (state.iso3ToName[iso3] || iso3) : 'Unknown';
-      const cnt    = iso3 ? (state.countryPolicyCounts[iso3] || 0) : 0;
-      const tip    = document.getElementById('tooltip');
-      tip.innerHTML = `<strong>${cname}</strong>${cnt} ${cnt===1?'measure':'measures'}`;
+      const iso3  = NUM_TO_ISO3[d.id];
+      const cname = iso3 ? (state.iso3ToName[iso3] || iso3) : 'Unknown';
+      const cnt   = iso3 ? (state.countryPolicyCounts[iso3] || 0) : 0;
+      const tip   = document.getElementById('tooltip');
+      tip.innerHTML = `<strong>${cname}</strong>${cnt} ${cnt === 1 ? 'measure' : 'measures'}`;
       tip.style.display = 'block';
     })
     .on('mousemove', function(event) {
@@ -947,24 +863,20 @@ function drawMap(world) {
       if (!iso3) return;
       const cnt  = state.allPolicies.filter(p => p.iso3 === iso3).length;
       if (cnt === 0) return;
-      if (state.selectedCountry === iso3) {
-        deselectCountry();
-      } else {
-        selectCountry(iso3, state.iso3ToName[iso3] || iso3);
-      }
+      if (state.selectedCountry === iso3) deselectCountry();
+      else selectCountry(iso3, state.iso3ToName[iso3] || iso3);
     });
 
-  // Store path function for later redraws
-  state._path         = path;
-  state._num2iso3     = NUM_TO_ISO3;
+  state._path          = path;
+  state._num2iso3      = NUM_TO_ISO3;
   state._countriesData = countries.features;
 }
 
 function updateMapColors() {
   d3.selectAll('.country-path').attr('fill', function() {
-    const iso3    = this.getAttribute('data-iso3');
-    const cnt     = iso3 ? (state.countryPolicyCounts[iso3] || 0) : 0;
-    const sel     = state.selectedCountry;
+    const iso3 = this.getAttribute('data-iso3');
+    const cnt  = iso3 ? (state.countryPolicyCounts[iso3] || 0) : 0;
+    const sel  = state.selectedCountry;
     if (sel && iso3 === sel) return '#E0F4FD';
     return policyColor(cnt);
   })
@@ -978,10 +890,8 @@ function selectCountry(iso3, name) {
   state.selectedOrg = null;
   document.getElementById('active-org-bar').classList.remove('visible');
   renderOrgPanel();
-  const bar  = document.getElementById('active-country-bar');
-  const nm   = document.getElementById('active-country-name');
-  nm.textContent = name;
-  bar.classList.add('visible');
+  document.getElementById('active-country-name').textContent = name;
+  document.getElementById('active-country-bar').classList.add('visible');
   updateMapColors();
   applyFilters();
 }
@@ -1025,9 +935,8 @@ function selectOrg(name) {
   state.selectedCountry = null;
   document.getElementById('active-country-bar').classList.remove('visible');
   updateMapColors();
-  const bar = document.getElementById('active-org-bar');
   document.getElementById('active-org-name').textContent = name;
-  bar.classList.add('visible');
+  document.getElementById('active-org-bar').classList.add('visible');
   renderOrgPanel();
   applyFilters();
 }
@@ -1041,25 +950,27 @@ function deselectOrg() {
 
 // ── Filters ──────────────────────────────────────────────────────────────────
 function applyFilters() {
-  const region  = document.getElementById('filter-region').value;
-  const sector  = document.getElementById('filter-sector').value;
-  const type    = document.getElementById('filter-type').value;
-  const search  = document.getElementById('filter-search').value.toLowerCase().trim();
+  const region   = document.getElementById('filter-region').value;
+  const pillar   = document.getElementById('filter-pillar').value;
+  const typology = document.getElementById('filter-typology').value;
+  const search   = document.getElementById('filter-search').value.toLowerCase().trim();
 
   state.filtered = state.allPolicies.filter(p => {
-    if (region && p.region !== region)                                 return false;
-    if (sector && p.sector !== sector)                                 return false;
-    if (type   && p.policy_type !== type)                              return false;
+    if (region   && p.region !== region)                           return false;
+    if (pillar   && p.pillar !== pillar)                           return false;
+    if (typology && p.crisis_response_typology !== typology)       return false;
     if (search) {
-      const haystack = [p.country, p.policy_name, p.sector, p.policy_type, p.quantitative_details, p.date, p.impacts].join(' ').toLowerCase();
+      const haystack = [
+        p.country, p.measure_name, p.pillar, p.measure_type,
+        p.impact_assessment, p.measure_description, p.date
+      ].join(' ').toLowerCase();
       if (!haystack.includes(search)) return false;
     }
-    if (state.selectedCountry && p.iso3 !== state.selectedCountry)    return false;
-    if (state.selectedOrg && p.country !== state.selectedOrg)         return false;
+    if (state.selectedCountry && p.iso3 !== state.selectedCountry) return false;
+    if (state.selectedOrg && p.country !== state.selectedOrg)      return false;
     return true;
   });
 
-  // Recompute per-country counts from filtered set
   state.countryPolicyCounts = {};
   state.filtered.forEach(p => {
     state.countryPolicyCounts[p.iso3] = (state.countryPolicyCounts[p.iso3] || 0) + 1;
@@ -1072,7 +983,6 @@ function applyFilters() {
 
 // ── Table ────────────────────────────────────────────────────────────────────
 function renderTable() {
-  // Sort
   const col = state.sortCol;
   const dir = state.sortDir === 'asc' ? 1 : -1;
   const sorted = [...state.filtered].sort((a, b) => {
@@ -1082,67 +992,66 @@ function renderTable() {
     return av.toString().localeCompare(bv.toString()) * dir;
   });
 
-  // Pagination
   const total = sorted.length;
   const pages = Math.max(1, Math.ceil(total / state.pageSize));
   if (state.page > pages) state.page = pages;
   const start = (state.page - 1) * state.pageSize;
   const slice = sorted.slice(start, start + state.pageSize);
 
-  // Count
   document.getElementById('table-count').innerHTML =
-    `Showing <strong>${Math.min(start+1, total)}–${Math.min(start+state.pageSize, total)}</strong> of <strong>${total}</strong> measure${total===1?'':'s'}`;
+    `Showing <strong>${Math.min(start + 1, total)}–${Math.min(start + state.pageSize, total)}</strong> of <strong>${total}</strong> measure${total === 1 ? '' : 's'}`;
 
-  // Rows
   const tbody = document.getElementById('table-body');
-  tbody.innerHTML = slice.map(p => `
-    <tr data-iso3="${p.iso3}" data-id="${p.id}" class="${p.iso3 === state.selectedCountry ? 'highlighted' : ''}">
+  tbody.innerHTML = slice.map(p => {
+    // Support both new schema (measure_name) and old (policy_name) during transition
+    const name      = p.measure_name || p.policy_name || '';
+    const desc      = p.measure_description || '';
+    const descShort = desc.length > 100 ? esc(desc.slice(0, 100)) + '…' : esc(desc);
+    return `
+    <tr data-iso3="${esc(p.iso3)}" data-id="${p.id}" class="${p.iso3 === state.selectedCountry ? 'highlighted' : ''}">
       <td class="country-cell">${esc(p.country)}</td>
       <td>${esc(p.region)}</td>
-      <td><strong>${esc(p.policy_name)}</strong></td>
-      <td><span class="sector-badge ${sectorBadgeClass(p.sector)}">${esc(p.sector)}</span></td>
-      <td><span class="badge ${typeBadgeClass(p.policy_type)}">${esc(p.policy_type)}</span></td>
-      <td style="white-space:nowrap;font-size:12px;color:#555">${esc(p.date)}</td>
-      <td class="desc-cell">${esc(p.quantitative_details)}</td>
-      <td class="desc-cell">${esc(p.impacts || '')}</td>
-    </tr>
-  `).join('');
+      <td><strong>${esc(name)}</strong></td>
+      <td class="desc-cell">${descShort}</td>
+      <td><span class="pillar-badge ${pillarBadgeClass(p.pillar)}">${pillarEmoji(p.pillar)} ${esc(p.pillar || '')}</span></td>
+      <td><span class="typology-badge ${typologyBadgeClass(p.crisis_response_typology)}">${typologyEmoji(p.crisis_response_typology)} ${esc(p.crisis_response_typology || '')}</span></td>
+      <td style="font-size:12px;color:#555">${esc(p.impact_assessment || '')}</td>
+      <td><button class="btn-view-details" data-id="${p.id}">+ View Details</button></td>
+    </tr>`;
+  }).join('');
 
-  // Click row → open modal
-  tbody.addEventListener('click', e => {
+  // Use .onclick to avoid stacking listeners across re-renders
+  tbody.onclick = e => {
     const row = e.target.closest('tr[data-id]');
     if (!row) return;
-    const id = parseInt(row.dataset.id);
+    const id     = parseInt(row.dataset.id);
     const policy = state.allPolicies.find(p => p.id === id);
     if (policy) openModal(policy);
-  });
+  };
 
-  // Sort headers
   document.querySelectorAll('thead th[data-col]').forEach(th => {
-    th.classList.remove('sort-asc','sort-desc');
+    th.classList.remove('sort-asc', 'sort-desc');
     if (th.dataset.col === state.sortCol) {
       th.classList.add(state.sortDir === 'asc' ? 'sort-asc' : 'sort-desc');
     }
   });
 
-  // Pagination
   renderPagination(pages);
 }
 
 function renderPagination(pages) {
   const pag = document.getElementById('pagination');
   if (pages <= 1) { pag.innerHTML = ''; return; }
-  let html = `<button class="page-btn" id="pg-prev" ${state.page===1?'disabled':''}>← Prev</button>`;
+  let html = `<button class="page-btn" id="pg-prev" ${state.page === 1 ? 'disabled' : ''}>← Prev</button>`;
   for (let i = 1; i <= pages; i++) {
     if (pages > 7 && Math.abs(i - state.page) > 2 && i !== 1 && i !== pages) {
-      if (i === 2 || i === pages-1) html += `<span style="padding:0 4px;color:#aaa">…</span>`;
+      if (i === 2 || i === pages - 1) html += `<span style="padding:0 4px;color:#aaa">…</span>`;
       continue;
     }
-    html += `<button class="page-btn${i===state.page?' active':''}" data-pg="${i}">${i}</button>`;
+    html += `<button class="page-btn${i === state.page ? ' active' : ''}" data-pg="${i}">${i}</button>`;
   }
-  html += `<button class="page-btn" id="pg-next" ${state.page===pages?'disabled':''}>Next →</button>`;
+  html += `<button class="page-btn" id="pg-next" ${state.page === pages ? 'disabled' : ''}>Next →</button>`;
   pag.innerHTML = html;
-
   pag.querySelector('#pg-prev')?.addEventListener('click', () => { state.page--; renderTable(); });
   pag.querySelector('#pg-next')?.addEventListener('click', () => { state.page++; renderTable(); });
   pag.querySelectorAll('[data-pg]').forEach(btn => {
@@ -1152,24 +1061,40 @@ function renderPagination(pages) {
 
 // ── Modal ────────────────────────────────────────────────────────────────────
 function openModal(p) {
-  document.getElementById('modal-title').textContent = p.policy_name;
-  document.getElementById('modal-badges').innerHTML =
-    `<span class="sector-badge ${sectorBadgeClass(p.sector)}">${esc(p.sector)}</span>` +
-    `<span class="badge ${typeBadgeClass(p.policy_type)}">${esc(p.policy_type)}</span>`;
-  document.getElementById('modal-meta').textContent =
-    [p.country, p.region, p.date].filter(Boolean).join(' · ');
+  const name = p.measure_name || p.policy_name || '';
+  document.getElementById('modal-title').textContent = name;
+  document.getElementById('modal-meta').textContent  = [p.country, p.region].filter(Boolean).join(', ');
 
-  const sections = [];
-  if (p.quantitative_details) {
-    sections.push(`<div class="modal-section"><label>Key Details</label><p>${esc(p.quantitative_details)}</p></div>`);
+  const parts = [];
+
+  // [HEADER ROW: Categorical Metadata tags]
+  const tags = [];
+  if (p.pillar)           tags.push(`<span class="modal-tag"><span class="modal-tag-label">Pillar</span><span class="pillar-badge ${pillarBadgeClass(p.pillar)}">${pillarEmoji(p.pillar)} ${esc(p.pillar)}</span></span>`);
+  if (p.technology_focus) tags.push(`<span class="modal-tag"><span class="modal-tag-label">Technology Focus</span>${esc(p.technology_focus)}</span>`);
+  if (p.measure_type)     tags.push(`<span class="modal-tag"><span class="modal-tag-label">Measure Type</span><span class="badge ${typeBadgeClass(p.measure_type)}">${esc(p.measure_type)}</span></span>`);
+  if (p.date)             tags.push(`<span class="modal-tag"><span class="modal-tag-label">Date</span>${esc(p.date)}</span>`);
+  if (tags.length) parts.push(`<div class="modal-tag-row">${tags.join('')}</div>`);
+
+  // [SECTION 1: Analytical Classification]
+  const classif = [];
+  if (p.crisis_response_typology) classif.push(`<div class="modal-section"><label>Crisis Response Typology</label><p><span class="typology-badge ${typologyBadgeClass(p.crisis_response_typology)}">${typologyEmoji(p.crisis_response_typology)} ${esc(p.crisis_response_typology)}</span></p></div>`);
+  if (p.impact_assessment)        classif.push(`<div class="modal-section"><label>Impact Assessment</label><p>${esc(p.impact_assessment)}</p></div>`);
+  if (classif.length) parts.push(`<div class="modal-classification">${classif.join('')}</div>`);
+
+  // [SECTION 2: Quantifiable Targets / Capital]
+  if (p.quantifiable_targets) {
+    parts.push(`<div class="modal-section"><label>Quantifiable Targets / Capital</label><div class="quant-callout">${esc(p.quantifiable_targets)}</div></div>`);
   }
-  if (p.impacts) {
-    sections.push(`<div class="modal-section"><label>Impacts</label><p>${esc(p.impacts)}</p></div>`);
+
+  // [SECTION 3: Institutional Analysis]
+  if (p.measure_description) {
+    parts.push(`<div class="modal-section"><label>Measure Description</label><p>${esc(p.measure_description)}</p></div>`);
   }
-  if (p.description) {
-    sections.push(`<div class="modal-section"><label>Description</label><p>${esc(p.description)}</p></div>`);
+  if (p.observed_expected_impact) {
+    parts.push(`<div class="modal-section"><label>Observed / Expected Impact</label><p>${esc(p.observed_expected_impact)}</p></div>`);
   }
-  document.getElementById('modal-body').innerHTML = sections.join('');
+
+  document.getElementById('modal-body').innerHTML = parts.join('');
 
   const footerParts = [];
   const url = p.source_url || '';
@@ -1197,17 +1122,17 @@ function closeModal() {
 }
 
 function esc(s) {
-  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
 // ── Wire up controls ──────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  ['filter-region','filter-sector','filter-type'].forEach(id => {
+  ['filter-region', 'filter-pillar', 'filter-typology'].forEach(id => {
     document.getElementById(id).addEventListener('change', applyFilters);
   });
   document.getElementById('filter-search').addEventListener('input', applyFilters);
   document.getElementById('btn-clear').addEventListener('click', () => {
-    ['filter-region','filter-sector','filter-type'].forEach(id =>
+    ['filter-region', 'filter-pillar', 'filter-typology'].forEach(id =>
       document.getElementById(id).value = '');
     document.getElementById('filter-search').value = '';
     deselectCountry();
@@ -1240,7 +1165,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ── ISO numeric → ISO 3166-1 alpha-3 lookup ──────────────────────────────────
-// Partial list covering the countries in our dataset + common ones
+// Partial list covering countries in the dataset + common ones
 function buildNumericToIso3() {
   return {
     4:'AFG',8:'ALB',12:'DZA',24:'AGO',32:'ARG',36:'AUS',40:'AUT',50:'BGD',
@@ -1258,24 +1183,16 @@ function buildNumericToIso3() {
     706:'SOM',710:'ZAF',724:'ESP',728:'SSD',729:'SDN',752:'SWE',756:'CHE',
     760:'SYR',764:'THA',792:'TUR',800:'UGA',804:'UKR',784:'ARE',826:'GBR',
     840:'USA',858:'URY',862:'VEN',704:'VNM',887:'YEM',894:'ZMB',716:'ZWE',
-    // Additional
-    12:'DZA',44:'BHS',48:'BHR',52:'BRB',84:'BLZ',204:'BEN',60:'BMU',
-    96:'BRN',86:'IOT',226:'GNQ',232:'ERI',233:'EST',238:'FLK',
-    242:'FJI',254:'GUF',258:'PYF',260:'ATF',304:'GRL',312:'GLP',
-    316:'GUM',324:'GIN',328:'GUY',334:'HMD',336:'VAT',352:'ISL',
-    174:'COM',175:'MYT',178:'COG',184:'COK',248:'ALA',270:'GMB',
-    292:'GIB',296:'KIR',384:'CIV',388:'JAM',426:'LSO',428:'LVA',
-    440:'LTU',442:'LUX',446:'MAC',450:'MDG',454:'MWI',458:'MYS',
-    462:'MDV',466:'MLI',470:'MLT',474:'MTQ',478:'MRT',480:'MUS',
-    496:'MNG',498:'MDA',500:'MSR',516:'NAM',520:'NRU',531:'CUW',
-    533:'ABW',534:'SXM',535:'BES',540:'NCL',548:'VUT',570:'NIU',
-    574:'NFK',580:'MNP',581:'UMI',583:'FSM',584:'MHL',585:'PLW',
-    598:'PNG',626:'TLS',638:'REU',646:'RWA',652:'BLM',654:'SHN',
-    659:'KNA',660:'AIA',662:'LCA',666:'SPM',670:'VCT',674:'SMR',
-    678:'STP',690:'SYC',702:'SGP',703:'SVK',705:'SVN',706:'SOM',
-    740:'SUR',744:'SJM',748:'SWZ',762:'TJK',764:'THA',768:'TGO',
-    772:'TKL',776:'TON',780:'TTO',788:'TUN',795:'TKM',796:'TCA',
-    798:'TUV',834:'TZA',860:'UZB',876:'WLF',882:'WSM',887:'YEM',
+    44:'BHS',48:'BHR',52:'BRB',84:'BLZ',60:'BMU',96:'BRN',226:'GNQ',
+    232:'ERI',233:'EST',242:'FJI',304:'GRL',316:'GUM',328:'GUY',352:'ISL',
+    174:'COM',178:'COG',270:'GMB',292:'GIB',296:'KIR',384:'CIV',426:'LSO',
+    428:'LVA',440:'LTU',442:'LUX',446:'MAC',450:'MDG',454:'MWI',458:'MYS',
+    462:'MDV',466:'MLI',470:'MLT',478:'MRT',480:'MUS',496:'MNG',498:'MDA',
+    520:'NRU',531:'CUW',533:'ABW',534:'SXM',540:'NCL',548:'VUT',570:'NIU',
+    583:'FSM',584:'MHL',585:'PLW',598:'PNG',626:'TLS',638:'REU',646:'RWA',
+    659:'KNA',662:'LCA',670:'VCT',674:'SMR',678:'STP',690:'SYC',702:'SGP',
+    703:'SVK',705:'SVN',740:'SUR',748:'SWZ',762:'TJK',768:'TGO',776:'TON',
+    780:'TTO',788:'TUN',795:'TKM',798:'TUV',834:'TZA',860:'UZB',882:'WSM',
     894:'ZMB'
   };
 }

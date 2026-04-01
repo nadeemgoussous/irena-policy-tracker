@@ -5,14 +5,14 @@ Usage:
     python sync_from_sheets.py --url "https://docs.google.com/spreadsheets/d/e/PUBLISHED_ID/pub?output=csv"
 
 The sheet must have these columns (row 1 = headers, exact names):
-    id, country, iso3, region, policy_name, sector, policy_type,
-    date, quantitative_details, impacts
+    id | country | iso3 | region | measure_name | pillar | crisis_response_typology | date
 
 Optional columns (read if present, ignored if missing):
-    description, source_url
+    technology_focus | measure_type | quantifiable_targets | impact_assessment |
+    measure_description | observed_expected_impact | source_url
 
 Rows with an empty 'country' are skipped.
-The top-level 'context' and 'last_updated' fields in data.json are preserved/updated automatically.
+The top-level 'last_updated' field in data.json is set to today's date automatically.
 """
 
 import argparse
@@ -26,8 +26,8 @@ from datetime import date
 DATA_FILE = "data.json"
 
 REQUIRED_COLUMNS = [
-    "country", "iso3", "region", "policy_name",
-    "sector", "policy_type", "date", "quantitative_details", "impacts"
+    "country", "iso3", "region", "measure_name",
+    "pillar", "crisis_response_typology", "date"
 ]
 
 
@@ -53,13 +53,16 @@ def parse_policies(csv_text):
             "country": row["country"].strip(),
             "iso3": row["iso3"].strip(),
             "region": row["region"].strip(),
-            "policy_name": row["policy_name"].strip(),
-            "sector": row["sector"].strip(),
-            "policy_type": row["policy_type"].strip(),
+            "measure_name": row["measure_name"].strip(),
+            "pillar": row["pillar"].strip(),
+            "technology_focus": row.get("technology_focus", "").strip(),
+            "measure_type": row.get("measure_type", "").strip(),
+            "crisis_response_typology": row["crisis_response_typology"].strip(),
             "date": row["date"].strip(),
-            "quantitative_details": row["quantitative_details"].strip(),
-            "impacts": row.get("impacts", "").strip(),
-            "description": row.get("description", "").strip(),
+            "quantifiable_targets": row.get("quantifiable_targets", "").strip(),
+            "impact_assessment": row.get("impact_assessment", "").strip(),
+            "measure_description": row.get("measure_description", "").strip(),
+            "observed_expected_impact": row.get("observed_expected_impact", "").strip(),
             "source_url": row.get("source_url", "").strip(),
         }
         policies.append(policy)
@@ -77,17 +80,8 @@ def main():
     policies = parse_policies(csv_text)
     print(f"Parsed {len(policies)} policies from sheet")
 
-    # Load existing data.json to preserve top-level context
-    try:
-        with open(DATA_FILE, "r", encoding="utf-8") as f:
-            existing = json.load(f)
-        top_context = existing.get("context", "")
-    except FileNotFoundError:
-        top_context = ""
-
     output = {
         "last_updated": date.today().isoformat(),
-        "context": top_context,
         "policies": policies,
     }
 
