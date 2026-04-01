@@ -1,7 +1,7 @@
-# IRENA Renewable Energy Policy Tracker
+# IRENA Energy Crisis Transition Tracker (ECTT)
 
 ## What this project is
-Interactive policy tracker for IRENA — a world map + filterable table showing renewable energy policy and market responses to the 2026 Iran war energy crisis. Built as a static HTML demo hosted on GitHub Pages, with future integration into IRENA's Sitecore CMS (likely via iframe).
+Interactive policy tracker for IRENA — a world map + filterable table tracking national and multilateral responses to the 2026 Iran war energy crisis. Built as a static HTML demo hosted on GitHub Pages, with future integration into IRENA's Sitecore CMS (likely via iframe).
 
 **Live site:** https://nadeemgoussous.github.io/irena-policy-tracker/
 **GitHub repo:** https://github.com/nadeemgoussous/irena-policy-tracker
@@ -13,7 +13,7 @@ Interactive policy tracker for IRENA — a world map + filterable table showing 
 | `index.html` | The tracker — **this is the GitHub Pages entry point and the only file to edit** |
 | `data.json` | Policy database — **do not edit manually; managed via Google Sheets sync** |
 | `sync_from_sheets.py` | Fetches the published Google Sheet CSV and overwrites `data.json` — run by GitHub Actions |
-| `export_to_sheets.py` | One-time script to export `data.json` → `policies_for_sheets.csv` for seeding the Google Sheet |
+| `export_to_sheets.py` | Exports `data.json` → `policies_for_sheets.csv` for seeding/migrating the Google Sheet |
 | `policies.md` | Source document for current dataset (2026 Iran crisis responses) |
 | `world-110m.json` | TopoJSON world map geometry (Natural Earth 110m, do not edit) |
 | `tests/tracker.spec.js` | Playwright test suite — 39 tests across 9 suites |
@@ -67,7 +67,7 @@ git push
 ### Sheet column order (row 1 = headers, exact names required)
 
 ```
-id | country | iso3 | region | policy_name | sector | policy_type | date | quantitative_details | context | impacts
+id | country | iso3 | region | measure_name | pillar | technology_focus | measure_type | crisis_response_typology | date | quantifiable_targets | impact_assessment | measure_description | observed_expected_impact | source_url
 ```
 
 ### Adding / editing / deleting entries
@@ -83,6 +83,7 @@ Deleting a row from the sheet removes that entry from the tracker on the next sy
 ```bash
 python export_to_sheets.py
 # outputs policies_for_sheets.csv — import into Google Sheets
+# script warns on rows missing pillar or crisis_response_typology
 ```
 
 ### Changing the sync frequency
@@ -97,45 +98,51 @@ Each entry in `data.json`:
 ```json
 {
   "id": 1,
-  "country": "Spain",
-  "iso3": "ESP",
-  "region": "Europe",
-  "policy_name": "RE Grid as Energy Security Shield",
-  "sector": "Cross-cutting",
-  "policy_type": "Existing Capacity",
-  "date": "Ongoing March 2026",
-  "quantitative_details": "60%+ electricity from renewables; wholesale prices €37–57/MWh",
-  "context": "Decades of RE investment now paying off as energy security shield",
-  "impacts": "Wholesale electricity prices 3–4× lower than gas-dependent neighbours"
+  "country": "South Korea",
+  "iso3": "KOR",
+  "region": "Asia-Pacific",
+  "measure_name": "100 GW RE Target Acceleration",
+  "pillar": "Renewable Energy",
+  "technology_focus": "Broad RE",
+  "measure_type": "Target / Strategy",
+  "crisis_response_typology": "Accelerated Pivot",
+  "date": "March 2026",
+  "quantifiable_targets": "100 GW RE by 2030",
+  "impact_assessment": "Fossil Import Displacement",
+  "measure_description": "Upward revision of national renewable energy generation targets and the systematic removal of local regulatory distance constraints on solar PV installations.",
+  "observed_expected_impact": "Establishes a revised target of 20% renewable generation by 2030, reducing systemic vulnerability following acute Middle Eastern oil supply disruptions.",
+  "source_url": "https://..."
 }
 ```
 
 Valid `region` values: `Africa` / `Americas` / `Asia-Pacific` / `Europe` / `International` / `Middle East`
 
-Valid `sector` values: `Buildings` / `Cross-cutting` / `Industry` / `Power` / `Transport`
+Valid `pillar` values: `Renewable Energy` / `Electrification` / `Infrastructure` / `Finance & Investment` / `Analysis`
 
-Valid `policy_type` values: `Analysis` / `Emergency Measure` / `Existing Capacity` / `Financing / Strategy` / `Incentive` / `Infrastructure` / `Mandate / Regulation` / `Market Response` / `Target / Strategy`
+Valid `crisis_response_typology` values: `Accelerated Pivot` / `Pre-Existing Buffer`
+
+Valid `measure_type` values: `Analysis` / `Emergency Measure` / `Existing Capacity` / `Financing / Strategy` / `Incentive` / `Infrastructure` / `Mandate / Regulation` / `Market Response` / `Target / Strategy`
 
 For multilateral organizations (IEA, IRENA, ASEAN, G7 etc.) use `iso3: "INT"` and `region: "International"`.
 
 ## UI features (current)
 
-**Table columns:** Country / Org · Region · Policy / Measure · Sector · Type (colour badge) · Date · Key Details · Impacts
+**Table columns:** Country · Region · Measure Name · Measure Description · Pillar (badge) · Response Typology (badge) · Impact Assessment · [ + View Details ]
 
-**Filter dropdowns:** Region · Sector · Policy Type · Search (full-text: searches country, policy name, sector, type, key details, context, date)
+**Filter dropdowns:** Region · Pillar · Response Typology · Search (full-text: searches country, measure name, pillar, measure type, impact assessment, description, date)
 
-**Map:** D3 choropleth — click a country to filter the table; choropleth shading reflects current filtered counts
+**Map:** D3 choropleth — click a country to filter the table; choropleth shading reflects current filtered counts. IRENA geographic disclaimer shown below map.
 
-**Org panel:** Clickable chip strip below the map for multilateral/regional orgs (`iso3: "INT"` or `"EUU"`) that have no map geometry — IEA, IRENA, EU, ASEAN, G7, UNFCCC, Ember, IEEFA
+**Org panel:** Clickable chip strip below the map for multilateral/regional orgs (`iso3: "INT"` or `"EUU"`) — IEA, IRENA, EU, ASEAN, G7, UNFCCC, Ember, IEEFA
 
-**Row modal:** Clicking any table row opens a detail modal with full context, key details, impacts, and source link.
+**Row modal:** Structured policy brief — metadata tags (pillar, technology focus, measure type, date), analytical classification (typology + impact assessment), quantitative call-out box, measure description, observed/expected impact, source link.
 
 ## Tech stack
 
 - **D3.js v7** — choropleth SVG world map (CDN)
 - **TopoJSON** — world map geometry parsing
 - **Vanilla JS** — filters, table, pagination, map↔table sync
-- **IRENA design system** — palette `#003F73` / `#00A3E0`, Graphik font, `l-grid` layout, max-width 1316px
+- **IRENA design system** — palette `#0073AE` / `#00A3E0`, max-width 1316px
 
 ## Sitecore integration path (future)
 
