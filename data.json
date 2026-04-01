@@ -12,7 +12,9 @@
       "policy_type": "Existing Capacity",
       "date": "Ongoing March 2026",
       "quantitative_details": "60%+ electricity from renewables; wholesale prices €37–57/MWh vs €113 Germany, €141 Italy; gas sets price only 15% of time vs 89% in Italy",
-      "context": "Decades of RE investment now paying off as energy security shield; strong winds and heavy rains produced record hydro and wind output"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 2,
@@ -24,7 +26,9 @@
       "policy_type": "Emergency Measure",
       "date": "Mar 20–21, 2026",
       "quantitative_details": "€5B total, 80 measures; VAT on energy cut 21%→10%; electricity bills cut 13%; petrol/diesel ~€0.30/L cheaper; 80% grid toll reduction for energy-intensive industry (~€200M savings); benefits 20M households, 3M businesses; in force until Jun 30, 2026",
-      "context": "PM Sánchez: 'Today we are more resilient thanks to renewables, and we must continue on this path'"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 3,
@@ -36,7 +40,9 @@
       "policy_type": "Incentive",
       "date": "Mar 20–21, 2026",
       "quantitative_details": "Massive income tax deductions for rooftop solar, EV charging points, heat pumps; accelerated RE permitting; embedded in €5B crisis package",
-      "context": "Structural RE measure framed explicitly as investment in 'energy sovereignty', not climate policy"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 4,
@@ -48,7 +54,9 @@
       "policy_type": "Financing / Strategy",
       "date": "########",
       "quantitative_details": "€75B EIB clean energy financing over 3 years; €500M equity fund for grid operators; €500M pilot for 'energy efficiency as a service'; €200M InvestEU for SMRs",
-      "context": "Von der Leyen: crisis cost EU €3.5B extra in fossil imports in first 10 days alone"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 5,
@@ -60,7 +68,9 @@
       "policy_type": "Target / Strategy",
       "date": "########",
       "quantitative_details": "Current target: 42.5% RE by 2030; RE reached 25.2% of energy (2024), ~48% of electricity (2025); consultation open to Jun 12; legislative proposal by end 2026",
-      "context": "Consultation launched 20 days into crisis, directly linked to energy security imperative"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 6,
@@ -72,7 +82,9 @@
       "policy_type": "Target / Strategy",
       "date": "########",
       "quantitative_details": "Streamlining energy efficiency rules to support 90% emissions reduction by 2040",
-      "context": "Paired with RE framework as twin pillars of crisis response"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 7,
@@ -84,7 +96,9 @@
       "policy_type": "Infrastructure",
       "date": "Ongoing March 2026",
       "quantitative_details": "€1.2T allocated for grid investment by 2040; 500+ GW new RE capacity; 8 cross-border 'Energy Highways'; 180 new transmission projects, 51 storage projects",
-      "context": "WindEurope CEO: 'Home-grown electricity is Europe's only future-proof energy strategy'"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 8,
@@ -95,8 +109,10 @@
       "sector": "Power",
       "policy_type": "Target / Strategy",
       "date": "########",
-      "quantitative_details": "+12 GW onshore wind auction volumes through 2030 (~2,000 additional turbines); avoids 6.5 Mt CO₂; saves ~€1B/yr on gas imports; lowers wholesale prices by 0.6 ct/kWh; reduces gas consumption by 7 bcm by 2030",
-      "context": "Energy Minister Reiche: 'energy policy is now security policy'"
+      "quantitative_details": "#ERROR!",
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 9,
@@ -108,7 +124,9 @@
       "policy_type": "Market Response",
       "date": "Mar-26",
       "quantitative_details": "E.ON solar inquiries doubled; 1KOMMA5° demand doubled vs prior month; Enpal demand at 2022 gas crisis levels; 40% jump in EV inquiries",
-      "context": "BSW: 'the energy price spike is opening many people's eyes'"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 10,
@@ -120,7 +138,9 @@
       "policy_type": "Target / Strategy",
       "date": "########",
       "quantitative_details": "AR8 brought forward to Jul 2026; up to 18 offshore wind farms eligible; prior AR7 secured record 14.7 GW across 201 projects; AR7 saves UK ~£4B/yr at current gas prices",
-      "context": "Miliband: 'There is no energy security while we are so dependent on fossil fuels'"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 11,
@@ -132,7 +152,9 @@
       "policy_type": "Mandate / Regulation",
       "date": "~Mar 24, 2026",
       "quantitative_details": "All new homes in England to include solar panels + low-carbon heating (heat pumps) from 2028; plug-in solar panels to retail shops within months",
-      "context": "Miliband: 'The Iran War has once again shown our drive for clean power is essential for our energy security'"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 12,
@@ -144,7 +166,9 @@
       "policy_type": "Financing / Strategy",
       "date": "########",
       "quantitative_details": "Up to £150M for zero-emission vessel development and deployment",
-      "context": "Decarbonizing shipping amid oil supply disruption"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 13,
@@ -156,7 +180,9 @@
       "policy_type": "Analysis",
       "date": "########",
       "quantitative_details": "Total cost of net zero by 2050 'no greater than the cost of a single fossil fuel price shock'; net-zero path would limit bill rise to 4% in crisis vs 59% without",
-      "context": "Published during crisis, powerfully reframing transition economics"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 14,
@@ -168,7 +194,9 @@
       "policy_type": "Existing Capacity",
       "date": "Mar-26",
       "quantitative_details": "Highest March nuclear generation since 2019; power exports nearly doubled YoY; Multiannual Energy Programme targets 380–420 TWh/yr nuclear by 2030–2035; 6 new EPR-2 reactors (10 GW)",
-      "context": "France leveraging existing low-carbon fleet to stabilize European prices"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 15,
@@ -180,7 +208,9 @@
       "policy_type": "Market Response",
       "date": "Mar-26",
       "quantitative_details": "Used EV 'bonanza' on Finn.no marketplace; electricity costs €15.77/100 kWh vs €35.23 in Germany",
-      "context": "Long-term RE + EV investment insulates from price shocks"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 16,
@@ -192,7 +222,9 @@
       "policy_type": "Emergency Measure",
       "date": "Mar-26",
       "quantitative_details": "€100M industry support; gas sets electricity price 89% of time; power at €141/MWh",
-      "context": "Most exposed major EU economy; highlights cost of low RE penetration"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 17,
@@ -204,7 +236,9 @@
       "policy_type": "Existing Capacity",
       "date": "Ongoing March 2026",
       "quantitative_details": "51 GW solar panels imported by early 2026; solar provides ~20–25% of electricity; $12B oil/gas imports avoided since 2020; projected additional $6.3B savings in 2026; fossil imports fell 40% (2022–24)",
-      "context": "Consumer/market-led revolution enabled by zero-tariff Chinese panel imports since 2013"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 18,
@@ -216,7 +250,9 @@
       "policy_type": "Emergency Measure",
       "date": "########",
       "quantitative_details": "4-day govt workweek; 50% WFH; 2-week school closure; 60% official vehicles grounded; 20% fuel price hike (largest in history); ministers forgo salaries; ~25–28 days fuel reserves",
-      "context": "Solar enabled WFH feasibility despite severe fuel shortage"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 19,
@@ -228,7 +264,9 @@
       "policy_type": "Mandate / Regulation",
       "date": "Feb-26",
       "quantitative_details": "Net metering shifted to net billing (export-import gap ~2:1); standard agreement cut from 7 to 5 years",
-      "context": "Controversial — critics say it undermines energy security by slowing the distributed solar growth that is Pakistan's strongest crisis buffer"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 20,
@@ -240,7 +278,9 @@
       "policy_type": "Emergency Measure",
       "date": "~Mar 25, 2026",
       "quantitative_details": "Digital petroleum rationing introduced; Sindh province considering lockdown-type measures",
-      "context": "Extending limited fuel supplies with only 25–28 days reserves"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 21,
@@ -252,7 +292,9 @@
       "policy_type": "Emergency Measure",
       "date": "########",
       "quantitative_details": "4-tier priority gas allocation; LPG refill minimum wait: 21→25 days; 48,000 KL additional kerosene authorized",
-      "context": "India imports ~60% of LPG from Gulf; 21 ships stalled in Strait of Hormuz"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 22,
@@ -264,7 +306,9 @@
       "policy_type": "Market Response",
       "date": "Mar-26",
       "quantitative_details": "E-cooking now ~20% cheaper than LPG; Gurugram electricity consumption up 8M units in 9 days; AP deploying induction stoves in Anganwadi centres; ₹2/unit electricity subsidy for eateries switching to induction",
-      "context": "LPG shortage making 330M clean cooking connections fragile; electric cooking is fastest-growing crisis response"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 23,
@@ -276,7 +320,9 @@
       "policy_type": "Existing Capacity",
       "date": "As of Feb 2026",
       "quantitative_details": "266 GW installed RE (~51% of total capacity); solar alone ~143 GW (50× since 2014); 500 GW target by 2030; ~35 GW faces curtailment risk from grid bottlenecks",
-      "context": "India more exposed than Pakistan despite larger RE base — heavier fossil import dependency"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 24,
@@ -288,7 +334,9 @@
       "policy_type": "Target / Strategy",
       "date": "Early March 2026",
       "quantitative_details": "100 GW RE target by 2030; 20% RE in generation by 2030; legislative reform removing local distance restrictions on solar; grid innovation plan within 6 months",
-      "context": "President Lee: crisis is 'a good opportunity to swiftly and extensively transition to renewable energy' — dramatic reversal from prior Yoon administration"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 25,
@@ -300,7 +348,9 @@
       "policy_type": "Target / Strategy",
       "date": "Early March 2026",
       "quantitative_details": "Utilization raised from ~70% to 80%+; 2.8 GWe + 700 MW SMR planned by 2038; Saeul 3 (1,400 MW) expected late 2026",
-      "context": "Complementary to RE push; imports 94% of energy, 70% crude from Middle East"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 26,
@@ -312,7 +362,9 @@
       "policy_type": "Emergency Measure",
       "date": "########",
       "quantitative_details": "₩26.2T (~$17.1B) total; ₩10.1T directly for oil price relief",
-      "context": "Stock market fell 18% in 4 trading days following Hormuz closure"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 27,
@@ -324,7 +376,9 @@
       "policy_type": "Infrastructure",
       "date": "2026",
       "quantitative_details": "3 GW new transmission capacity beneath planned highway corridor to Yongin semiconductor cluster",
-      "context": "Critical for both semiconductor production reliability and RE integration"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 28,
@@ -336,7 +390,9 @@
       "policy_type": "Target / Strategy",
       "date": "Mar-26",
       "quantitative_details": "14 of 54 reactors restarted post-Fukushima; nuclear at ~8% of electricity; aim to increase utilization further",
-      "context": "Imports 87% of energy; 95% of oil from Middle East"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 29,
@@ -348,7 +404,9 @@
       "policy_type": "Market Response",
       "date": "2025–2026",
       "quantitative_details": "~5.8–6 GW added in 2025, passing 100 GW cumulative; solar + wind at 11% of energy",
-      "context": "Experts calling for more investment; government restricting mega-solar but distributed solar growing"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 30,
@@ -360,7 +418,9 @@
       "policy_type": "Emergency Measure",
       "date": "########",
       "quantitative_details": "First country to declare energy emergency; 4-day govt workweek; AC ≥24°C; rooftop solar + storage promoted for diesel-dependent areas; 45 days reserves",
-      "context": "Imports 98% of oil from Middle East"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 31,
@@ -372,7 +432,9 @@
       "policy_type": "Target / Strategy",
       "date": "Mar-26",
       "quantitative_details": "Speeding up solar and geothermal; 2 SMRs by 2034 added to energy plan; 97% RE potential untapped",
-      "context": "21–23 day fuel reserves; defence ministry introduced 1 remote work day/week"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 32,
@@ -384,7 +446,9 @@
       "policy_type": "Existing Capacity",
       "date": "Mar-26",
       "quantitative_details": "Solar saves 'hundreds of millions of dollars' in potential coal/gas imports; E10 gasoline rollout accelerated; zero fuel taxes until Apr 15, 2026",
-      "context": "Trade ministry urged WFH (Mar 10); airlines cutting flights 10–50%"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 33,
@@ -396,7 +460,9 @@
       "policy_type": "Emergency Measure",
       "date": "Mid-March 2026",
       "quantitative_details": "Slashed EV service fees; ordered govt agencies not to buy new gas vehicles; 3-day school week; 4-day workweek",
-      "context": "Landlocked, impoverished; hundreds of filling stations closed"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 34,
@@ -408,7 +474,9 @@
       "policy_type": "Emergency Measure",
       "date": "Mar-26",
       "quantitative_details": "Strict fuel efficiency for state bodies; fuel taxes cut; fuel prices rose 68%; ~33% of 6,300 petrol stations shut; electric mobility promoted",
-      "context": "Energy Minister advocating ASEAN-wide power grid"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 35,
@@ -420,7 +488,9 @@
       "policy_type": "Emergency Measure",
       "date": "########",
       "quantitative_details": "Excise halved from 52.6→26.3 c/L for 3 months; $2.55B cost; saves ~A$19/tank; heavy vehicle charge zeroed",
-      "context": "Imports >90% refined oil; lowest IEA member oil stocks (~36 days)"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 36,
@@ -432,7 +502,9 @@
       "policy_type": "Analysis",
       "date": "Mar-26",
       "quantitative_details": "45% of main grid electricity from RE/storage; 4M+ households with solar; 454,000 EVs on road (13% new sales); FBT EV exemption costs $9.7B over 2026–30",
-      "context": "IEEFA: 'the perfect storm to boost energy security'; Climate Council: transition is the cure, not the cause"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 37,
@@ -444,7 +516,9 @@
       "policy_type": "Existing Capacity",
       "date": "Pre-existing (2024), ongoing",
       "quantitative_details": "Banned gasoline/diesel car imports (2024); EVs grew 1%→6% of market; 95% renewable electricity (Grand Ethiopian Renaissance Dam)",
-      "context": "Economists argue Ethiopia could 'avoid the worst of a global recession' via electric mobility"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 38,
@@ -456,7 +530,9 @@
       "policy_type": "Emergency Measure",
       "date": "~Mar 18–28, 2026",
       "quantitative_details": "Mandatory 9pm shop/restaurant/mall closure weekdays (10pm weekends); street lights dimmed; billboards off; partial remote work; govt vehicle fuel cut ~30%; monthly energy bill tripled to $1.65B; fuel prices raised up to 30%",
-      "context": "Ministers insist 'investment in renewable energy will continue to expand'"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 39,
@@ -468,7 +544,9 @@
       "policy_type": "Emergency Measure",
       "date": "Mar-26",
       "quantitative_details": "Increasing ethanol content in petrol to stretch fuel supplies",
-      "context": "Immediate fossil fuel demand reduction via domestic biofuel substitution"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 40,
@@ -480,7 +558,9 @@
       "policy_type": "Mandate / Regulation",
       "date": "Dec 2025 (pre-war)",
       "quantitative_details": "All new residential buildings must install solar (min 5 kW); non-residential >250 sqm roof; ~10,000 new homes/year; 15% annual ROI; 30% RE target by 2030 (from ~15%); needs 18–23 GW solar + 5.5 GW/33 GWh storage",
-      "context": "Policy enacted before crisis but directly relevant to energy security imperative"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 41,
@@ -492,7 +572,9 @@
       "policy_type": "Target / Strategy",
       "date": "Ongoing March 2026",
       "quantitative_details": "34 solar parks on grid, ~560 MW peak; ~38% of daytime generation from solar; 24% RE target by 2030; full transition needs $8–10B over decade",
-      "context": "Separate US oil blockade since Jan 2026; island-wide blackout Mar 16; analysts warn 'too little, too late' without battery storage"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 42,
@@ -504,7 +586,9 @@
       "policy_type": "Emergency Measure",
       "date": "Feb–Mar 2026",
       "quantitative_details": "Encouraging walking/non-fossil transport; decentralizing activities to local level; drastically cutting consumption",
-      "context": "Near-total fossil fuel cutoff from combined Iran crisis and US blockade"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 43,
@@ -516,7 +600,9 @@
       "policy_type": "Mandate / Regulation",
       "date": "Ongoing March 2026",
       "quantitative_details": "5 offshore wind projects halted; TotalEnergies paid ~$1B to abandon 2 wind leases redirected to oil/gas; IRA wind/solar credits truncated (construction by end 2026, completion by end 2027)",
-      "context": "Rhodium: 53–59% reduction in new clean power capacity over next decade"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 44,
@@ -528,7 +614,9 @@
       "policy_type": "Target / Strategy",
       "date": "Jan–Mar 2026",
       "quantitative_details": "Trump shared pro-rooftop-solar video; Interior reviewing ~20 stuck solar projects; residential 30% ITC eliminated by OBBBA (effective Jan 1, 2026)",
-      "context": "Paradox: crisis strengthens RE case while federal incentives removed"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 45,
@@ -540,7 +628,9 @@
       "policy_type": "Market Response",
       "date": "Mar-26",
       "quantitative_details": "Gas up 27% to $4.29/gal ($6.81 SF); CarEdge EV searches up 20%; Edmunds: electrified vehicle shopping rose 20.7%→22.4%; Chevy EV searches up 30%+",
-      "context": "Consumer interest surging despite federal EV subsidy repeal"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 46,
@@ -552,7 +642,9 @@
       "policy_type": "Existing Capacity",
       "date": "Ongoing",
       "quantitative_details": "70%+ of new car sales are electric",
-      "context": "High EV adoption insulates from oil price spikes; long-term policy investment paying off"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 47,
@@ -564,7 +656,9 @@
       "policy_type": "Emergency Measure",
       "date": "Mar 5–28, 2026",
       "quantitative_details": "Vehicle refueling limits; fuel rationing; early Ramadan holidays; universities closed; malls/restaurants closed at 9pm; temporary blackouts",
-      "context": "Imports 95% of energy; half electricity from gas"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 48,
@@ -576,7 +670,9 @@
       "policy_type": "Emergency Measure",
       "date": "Mid-March 2026",
       "quantitative_details": "Every Wednesday declared public holiday; 15 L/week for motorists; 200 L for public transport; QR-based National Fuel Pass",
-      "context": "President: 'We must prepare for the worst'"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 49,
@@ -588,7 +684,9 @@
       "policy_type": "Emergency Measure",
       "date": "Early March 2026",
       "quantitative_details": "Alternating driving days by license plate number; QR codes to prevent multiple refills",
-      "context": "Extreme fuel shortage"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 50,
@@ -600,7 +698,9 @@
       "policy_type": "Emergency Measure",
       "date": "########",
       "quantitative_details": "400M barrels released (>2× previous record); one-third of total government stockpiles",
-      "context": "Largest supply disruption in the history of the global oil market'"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 51,
@@ -612,7 +712,9 @@
       "policy_type": "Analysis",
       "date": "Mar 23–25, 2026",
       "quantitative_details": "Renewables = 85% of all new global power capacity in 2025; 90%+ of new RE projects cheaper than fossil alternatives; launched 2026 Energy Crisis Policy Response Tracker",
-      "context": "Birol: 'I expect one of the responses will be acceleration of renewables — homegrown domestic energy source'"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 52,
@@ -624,7 +726,9 @@
       "policy_type": "Analysis",
       "date": "~Mar 25, 2026",
       "quantitative_details": "WFH; cut highway speed by 10 km/h; switch to electric cooking; carpooling; divert LPG to essential uses; industrial efficiency",
-      "context": "Supply-side measures alone cannot fully offset the scale of the disruption'"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 53,
@@ -636,7 +740,9 @@
       "policy_type": "Analysis",
       "date": "########",
       "quantitative_details": "Called fossil dependence 'ripping away national security and sovereignty'; speech at Green Growth Summit",
-      "context": "Sunlight doesn't depend on narrow and vulnerable shipping straits. Wind blows without massive taxpayer-funded naval escorts'"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 54,
@@ -648,7 +754,9 @@
       "policy_type": "Analysis",
       "date": "Mar-26",
       "quantitative_details": "Global energy transition investment reached $2.4T in 2024 (20% increase); RE investment at $807B; grid investment needs $671B/yr through 2030; COP29 target: 1,500 GW storage by 2030",
-      "context": "Ongoing analytical support for transition amid crisis"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 55,
@@ -660,7 +768,9 @@
       "policy_type": "Target / Strategy",
       "date": "########",
       "quantitative_details": "Joint statement on energy security/resilience; referenced ASEAN Renewable Energy Long-Term Roadmap; member states' efficiency measures projected to reduce demand by 32.7% by 2050",
-      "context": "Redoubling efforts to switch from fossil fuels to renewables'"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 56,
@@ -672,7 +782,9 @@
       "policy_type": "Emergency Measure",
       "date": "########",
       "quantitative_details": "First combined finance/energy/central bank format in G7 history since 1975; Energy Commissioner called for 'reducing fossil imports, boosting RE production, establishing energy union'",
-      "context": "Fourth ministerial-level G7 meeting since war began; produced 'few actionable outcomes'"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 57,
@@ -684,7 +796,9 @@
       "policy_type": "Analysis",
       "date": "Mar-26",
       "quantitative_details": "Called crisis 'Asia's Ukraine moment'; scaling up EVs could save importers >$600B/yr in oil imports; Pakistan solar saved $12B+ since 2020",
-      "context": "Urgency of Asia's renewables pivot for macroeconomic stability'"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     },
     {
       "id": 58,
@@ -696,7 +810,9 @@
       "policy_type": "TEST",
       "date": "TEST",
       "quantitative_details": "TEST",
-      "context": "TEST"
+      "impacts": "Test",
+      "description": "",
+      "source_url": ""
     }
   ]
 }
