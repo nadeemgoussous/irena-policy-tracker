@@ -6,7 +6,10 @@ Usage:
 
 The sheet must have these columns (row 1 = headers, exact names):
     id, country, iso3, region, policy_name, sector, policy_type,
-    date, quantitative_details, context
+    date, quantitative_details, impacts
+
+Optional columns (read if present, ignored if missing):
+    description, source_url
 
 Rows with an empty 'country' are skipped.
 The top-level 'context' and 'last_updated' fields in data.json are preserved/updated automatically.
@@ -24,7 +27,7 @@ DATA_FILE = "data.json"
 
 REQUIRED_COLUMNS = [
     "country", "iso3", "region", "policy_name",
-    "sector", "policy_type", "date", "quantitative_details", "context", "impacts"
+    "sector", "policy_type", "date", "quantitative_details", "impacts"
 ]
 
 
@@ -55,8 +58,9 @@ def parse_policies(csv_text):
             "policy_type": row["policy_type"].strip(),
             "date": row["date"].strip(),
             "quantitative_details": row["quantitative_details"].strip(),
-            "context": row["context"].strip(),
             "impacts": row.get("impacts", "").strip(),
+            "description": row.get("description", "").strip(),
+            "source_url": row.get("source_url", "").strip(),
         }
         policies.append(policy)
     return policies

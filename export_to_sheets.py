@@ -9,7 +9,7 @@ Outputs:
 
 Column order matches what sync_from_sheets.py expects:
     id, country, iso3, region, policy_name, sector, policy_type,
-    date, quantitative_details, context
+    date, quantitative_details, impacts, description, source_url
 """
 
 import csv
@@ -20,7 +20,8 @@ OUTPUT_FILE = "policies_for_sheets.csv"
 
 COLUMNS = [
     "id", "country", "iso3", "region", "policy_name",
-    "sector", "policy_type", "date", "quantitative_details", "context"
+    "sector", "policy_type", "date", "quantitative_details", "impacts",
+    "description", "source_url"
 ]
 
 

@@ -339,7 +339,7 @@
     thead th.sort-desc .sort-icon::after { content: " ▼"; }
     thead th:not(.sort-asc):not(.sort-desc) .sort-icon::after { content: " ⇅"; }
 
-    tbody tr { border-bottom: 1px solid #EEE; transition: background .1s; }
+    tbody tr { border-bottom: 1px solid #EEE; transition: background .1s; cursor: pointer; }
     tbody tr:hover { background: var(--irena-teal-light); }
     tbody tr.highlighted { background: #E0F4FD; }
     tbody td { padding: 10px 12px; vertical-align: top; }
@@ -502,31 +502,98 @@
     }
     .org-chip.active .org-count { background: rgba(255,255,255,0.25); }
 
-    /* ── Context toggle ── */
-    .ctx-wrap { margin-top: 4px; }
-    .ctx-btn {
+    /* ── Modal ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--irena-white);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      max-width: 660px;
+      width: 100%;
+      max-height: 88vh;
+      overflow-y: auto;
+      position: relative;
+    }
+    .modal-header {
+      background: var(--irena-blue);
+      color: var(--irena-white);
+      padding: 20px 48px 20px 24px;
+      position: sticky;
+      top: 0;
+    }
+    .modal-header h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; line-height: 1.3; }
+    .modal-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+    .modal-meta { font-size: 12px; color: rgba(255,255,255,0.70); }
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
       background: none;
       border: none;
-      color: var(--irena-teal);
-      font-size: 11px;
+      color: rgba(255,255,255,0.8);
+      font-size: 22px;
       cursor: pointer;
-      padding: 0;
+      line-height: 1;
+      padding: 2px 6px;
+    }
+    .modal-close:hover { color: #fff; }
+    .modal-body { padding: 20px 24px; display: flex; flex-direction: column; gap: 14px; }
+    .modal-section label {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--irena-grey-dark);
+      margin-bottom: 4px;
+    }
+    .modal-section p { font-size: 13px; line-height: 1.6; color: #333; }
+    .modal-section p.italic { font-style: italic; color: #555; }
+    .modal-footer {
+      padding: 14px 24px;
+      border-top: 1px solid #EEE;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .modal-btn-link {
       display: inline-flex;
       align-items: center;
-      gap: 3px;
+      gap: 6px;
+      color: var(--irena-teal);
+      font-size: 13px;
+      text-decoration: none;
+      border: 1px solid var(--irena-teal);
+      border-radius: var(--radius);
+      padding: 5px 12px;
+      transition: background .15s;
     }
-    .ctx-btn:hover { text-decoration: underline; }
-    .ctx-body {
-      display: none;
-      font-size: 11px;
-      color: #666;
-      font-style: italic;
-      margin-top: 4px;
-      line-height: 1.5;
-      border-left: 2px solid var(--irena-teal-light);
-      padding-left: 8px;
+    .modal-btn-link:hover { background: var(--irena-teal-light); }
+    .modal-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      border: 1px solid var(--irena-grey-mid);
+      border-radius: var(--radius);
+      padding: 5px 12px;
+      background: none;
+      cursor: pointer;
+      color: #555;
+      transition: all .15s;
     }
-    .ctx-wrap.open .ctx-body { display: block; }
+    .modal-btn:hover { border-color: var(--irena-teal); color: var(--irena-teal); }
   </style>
 </head>
 <body>
@@ -686,6 +753,20 @@
       </table>
     </div>
     <div class="pagination" id="pagination"></div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <button class="modal-close" id="modal-close" title="Close">✕</button>
+    <div class="modal-header">
+      <h3 id="modal-title"></h3>
+      <div class="modal-badges" id="modal-badges"></div>
+      <div class="modal-meta" id="modal-meta"></div>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-footer" id="modal-footer"></div>
   </div>
 </div>
 
@@ -963,7 +1044,7 @@ function applyFilters() {
     if (sector && p.sector !== sector)                                 return false;
     if (type   && p.policy_type !== type)                              return false;
     if (search) {
-      const haystack = [p.country, p.policy_name, p.sector, p.policy_type, p.quantitative_details, p.context, p.date, p.impacts].join(' ').toLowerCase();
+      const haystack = [p.country, p.policy_name, p.sector, p.policy_type, p.quantitative_details, p.date, p.impacts].join(' ').toLowerCase();
       if (!haystack.includes(search)) return false;
     }
     if (state.selectedCountry && p.iso3 !== state.selectedCountry)    return false;
@@ -1008,10 +1089,10 @@ function renderTable() {
   // Rows
   const tbody = document.getElementById('table-body');
   tbody.innerHTML = slice.map(p => `
-    <tr data-iso3="${p.iso3}" class="${p.iso3 === state.selectedCountry ? 'highlighted' : ''}">
+    <tr data-iso3="${p.iso3}" data-id="${p.id}" class="${p.iso3 === state.selectedCountry ? 'highlighted' : ''}">
       <td class="country-cell">${esc(p.country)}</td>
       <td>${esc(p.region)}</td>
-      <td><strong>${esc(p.policy_name)}</strong>${p.context ? `<div class="ctx-wrap"><button class="ctx-btn" data-action="toggle-ctx">▸ context</button><div class="ctx-body">${esc(p.context)}</div></div>` : ''}</td>
+      <td><strong>${esc(p.policy_name)}</strong></td>
       <td><span class="sector-badge ${sectorBadgeClass(p.sector)}">${esc(p.sector)}</span></td>
       <td><span class="badge ${typeBadgeClass(p.policy_type)}">${esc(p.policy_type)}</span></td>
       <td style="white-space:nowrap;font-size:12px;color:#555">${esc(p.date)}</td>
@@ -1020,26 +1101,13 @@ function renderTable() {
     </tr>
   `).join('');
 
-  // Click row → select country on map; click context btn → toggle context
+  // Click row → open modal
   tbody.addEventListener('click', e => {
-    const ctxBtn = e.target.closest('[data-action="toggle-ctx"]');
-    if (ctxBtn) {
-      e.stopPropagation();
-      const wrap = ctxBtn.closest('.ctx-wrap');
-      wrap.classList.toggle('open');
-      ctxBtn.textContent = wrap.classList.contains('open') ? '▾ context' : '▸ context';
-      return;
-    }
-    const row = e.target.closest('tr[data-iso3]');
+    const row = e.target.closest('tr[data-id]');
     if (!row) return;
-    const iso3 = row.getAttribute('data-iso3');
-    if (!iso3 || iso3 === 'INT' || iso3 === 'EUU') return;
-    if (state.selectedCountry === iso3) {
-      deselectCountry();
-    } else {
-      const name = state.allPolicies.find(p => p.iso3 === iso3)?.country || iso3;
-      selectCountry(iso3, name);
-    }
+    const id = parseInt(row.dataset.id);
+    const policy = state.allPolicies.find(p => p.id === id);
+    if (policy) openModal(policy);
   });
 
   // Sort headers
@@ -1075,6 +1143,52 @@ function renderPagination(pages) {
   });
 }
 
+// ── Modal ────────────────────────────────────────────────────────────────────
+function openModal(p) {
+  document.getElementById('modal-title').textContent = p.policy_name;
+  document.getElementById('modal-badges').innerHTML =
+    `<span class="sector-badge ${sectorBadgeClass(p.sector)}">${esc(p.sector)}</span>` +
+    `<span class="badge ${typeBadgeClass(p.policy_type)}">${esc(p.policy_type)}</span>`;
+  document.getElementById('modal-meta').textContent =
+    [p.country, p.region, p.date].filter(Boolean).join(' · ');
+
+  const sections = [];
+  if (p.quantitative_details) {
+    sections.push(`<div class="modal-section"><label>Key Details</label><p>${esc(p.quantitative_details)}</p></div>`);
+  }
+  if (p.impacts) {
+    sections.push(`<div class="modal-section"><label>Impacts</label><p>${esc(p.impacts)}</p></div>`);
+  }
+  if (p.description) {
+    sections.push(`<div class="modal-section"><label>Description</label><p>${esc(p.description)}</p></div>`);
+  }
+  document.getElementById('modal-body').innerHTML = sections.join('');
+
+  const footerParts = [];
+  const url = p.source_url || '';
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    footerParts.push(`<a class="modal-btn-link" href="${esc(url)}" target="_blank" rel="noopener">↗ Source</a>`);
+  }
+  if (p.iso3 && p.iso3 !== 'INT' && p.iso3 !== 'EUU') {
+    footerParts.push(`<button class="modal-btn" data-iso3="${esc(p.iso3)}" data-country="${esc(p.country)}">⊙ Filter by country</button>`);
+  }
+  const footer = document.getElementById('modal-footer');
+  footer.innerHTML = footerParts.join('');
+  footer.querySelector('[data-iso3]')?.addEventListener('click', e => {
+    const btn = e.currentTarget;
+    closeModal();
+    selectCountry(btn.dataset.iso3, btn.dataset.country);
+  });
+
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
 function esc(s) {
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
@@ -1095,6 +1209,12 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   document.getElementById('btn-deselect').addEventListener('click', deselectCountry);
   document.getElementById('btn-deselect-org').addEventListener('click', deselectOrg);
+
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+  document.getElementById('modal-overlay').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeModal();
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
   document.querySelectorAll('thead th[data-col]').forEach(th => {
     th.addEventListener('click', () => {
