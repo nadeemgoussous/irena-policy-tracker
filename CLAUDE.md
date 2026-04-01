@@ -16,6 +16,8 @@ Interactive policy tracker for IRENA — a world map + filterable table showing 
 | `export_to_sheets.py` | One-time script to export `data.json` → `policies_for_sheets.csv` for seeding the Google Sheet |
 | `policies.md` | Source document for current dataset (2026 Iran crisis responses) |
 | `world-110m.json` | TopoJSON world map geometry (Natural Earth 110m, do not edit) |
+| `tests/tracker.spec.js` | Playwright test suite — 39 tests across 9 suites |
+| `playwright.config.js` | Playwright config — 3 profiles: Desktop Chrome, iPhone 13, Pixel 5 |
 
 ## Running locally
 
@@ -26,6 +28,17 @@ python -m http.server 8080
 ```
 
 Requires a server (not `file://`) because `data.json` and `world-110m.json` are fetched via `fetch()`.
+
+## Running tests
+
+```bash
+npx playwright test                        # all 3 profiles
+npx playwright test --project="Desktop Chrome"   # desktop only
+npx playwright test --project="Mobile Chrome (Pixel 5)"
+npx playwright show-report                 # open HTML report
+```
+
+Tests spin up the Python server automatically (`reuseExistingServer: true`). Requires Playwright browsers: `npx playwright install chromium webkit`.
 
 ## Deploying changes
 
@@ -107,7 +120,7 @@ For multilateral organizations (IEA, IRENA, ASEAN, G7 etc.) use `iso3: "INT"` an
 
 ## UI features (current)
 
-**Table columns:** Country / Org · Region · Policy / Measure (with expandable context) · Sector · Type (colour badge) · Date · Key Details
+**Table columns:** Country / Org · Region · Policy / Measure · Sector · Type (colour badge) · Date · Key Details · Impacts
 
 **Filter dropdowns:** Region · Sector · Policy Type · Search (full-text: searches country, policy name, sector, type, key details, context, date)
 
@@ -115,7 +128,7 @@ For multilateral organizations (IEA, IRENA, ASEAN, G7 etc.) use `iso3: "INT"` an
 
 **Org panel:** Clickable chip strip below the map for multilateral/regional orgs (`iso3: "INT"` or `"EUU"`) that have no map geometry — IEA, IRENA, EU, ASEAN, G7, UNFCCC, Ember, IEEFA
 
-**Context toggle:** Each table row has a `▸ context` button that expands an inline quote/context block
+**Row modal:** Clicking any table row opens a detail modal with full context, key details, impacts, and source link.
 
 ## Tech stack
 
