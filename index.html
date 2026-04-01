@@ -562,7 +562,7 @@
   <!-- Filters -->
   <div class="filters">
     <div class="filter-group">
-      <label>Region</label>
+      <label for="filter-region">Region</label>
       <select id="filter-region">
         <option value="">All Regions</option>
         <option>Africa</option>
@@ -574,7 +574,7 @@
       </select>
     </div>
     <div class="filter-group">
-      <label>Pillar</label>
+      <label for="filter-pillar">Pillar</label>
       <select id="filter-pillar">
         <option value="">All Pillars</option>
         <option>Renewable Energy</option>
@@ -585,7 +585,7 @@
       </select>
     </div>
     <div class="filter-group">
-      <label>Response Typology</label>
+      <label for="filter-typology">Response Typology</label>
       <select id="filter-typology">
         <option value="">All Typologies</option>
         <option>Accelerated Pivot</option>
@@ -593,7 +593,7 @@
       </select>
     </div>
     <div class="filter-group search-group">
-      <label>Search</label>
+      <label for="filter-search">Search</label>
       <div class="search-wrap">
         <input type="text" id="filter-search" placeholder="Country or measure name…">
       </div>
@@ -775,15 +775,32 @@ function typeBadgeClass(t) {
 async function init() {
   document.getElementById('year-footer').textContent = new Date().getFullYear();
 
-  const [dataResp, topoResp] = await Promise.all([
-    fetch('./data.json'),
-    fetch('./world-110m.json')
-  ]);
-
-  const data  = await dataResp.json();
-  const world = await topoResp.json();
+  let data, world;
+  try {
+    const [dataResp, topoResp] = await Promise.all([
+      fetch('./data.json'),
+      fetch('./world-110m.json')
+    ]);
+    if (!dataResp.ok) throw new Error(`data.json: ${dataResp.status}`);
+    if (!topoResp.ok) throw new Error(`world-110m.json: ${topoResp.status}`);
+    data  = await dataResp.json();
+    world = await topoResp.json();
+  } catch (err) {
+    document.querySelector('.wrapper').innerHTML =
+      `<div style="background:#fff;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.1);padding:32px;text-align:center;color:#B83318;">
+        <h2 style="margin-bottom:8px;">Failed to load tracker data</h2>
+        <p style="color:#555;">${esc(err.message)}</p>
+      </div>`;
+    return;
+  }
 
   state.allPolicies = data.policies;
+
+  // Build global country counts (used for map choropleth — stays fixed regardless of filters)
+  state.countryPolicyCounts = {};
+  data.policies.forEach(p => {
+    state.countryPolicyCounts[p.iso3] = (state.countryPolicyCounts[p.iso3] || 0) + 1;
+  });
 
   if (data.last_updated) {
     document.getElementById('header-updated').textContent = 'Last updated: ' + data.last_updated;
@@ -969,11 +986,6 @@ function applyFilters() {
     if (state.selectedCountry && p.iso3 !== state.selectedCountry) return false;
     if (state.selectedOrg && p.country !== state.selectedOrg)      return false;
     return true;
-  });
-
-  state.countryPolicyCounts = {};
-  state.filtered.forEach(p => {
-    state.countryPolicyCounts[p.iso3] = (state.countryPolicyCounts[p.iso3] || 0) + 1;
   });
 
   state.page = 1;
@@ -1192,8 +1204,7 @@ function buildNumericToIso3() {
     583:'FSM',584:'MHL',585:'PLW',598:'PNG',626:'TLS',638:'REU',646:'RWA',
     659:'KNA',662:'LCA',670:'VCT',674:'SMR',678:'STP',690:'SYC',702:'SGP',
     703:'SVK',705:'SVN',740:'SUR',748:'SWZ',762:'TJK',768:'TGO',776:'TON',
-    780:'TTO',788:'TUN',795:'TKM',798:'TUV',834:'TZA',860:'UZB',882:'WSM',
-    894:'ZMB'
+    780:'TTO',788:'TUN',795:'TKM',798:'TUV',834:'TZA',860:'UZB',882:'WSM'
   };
 }
 </script>
