@@ -5,3 +5,9 @@ webpage_design_files/
 # Python
 __pycache__/
 *.pyc
+
+# Playwright
+node_modules/
+test-results/
+playwright-report/
+TESTING_LOG.md

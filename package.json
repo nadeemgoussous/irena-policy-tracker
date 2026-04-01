@@ -1,0 +1,24 @@
+{
+  "name": "policy_tracker",
+  "version": "1.0.0",
+  "description": "Interactive world map + filterable table tracking renewable energy policy and market responses to the 2026 Iran war energy crisis. Built as a static HTML demo on GitHub Pages.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://nadeemgoussous@github.com/nadeemgoussous/irena-policy-tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/nadeemgoussous/irena-policy-tracker/issues"
+  },
+  "homepage": "https://github.com/nadeemgoussous/irena-policy-tracker#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.59.0"
+  }
+}
