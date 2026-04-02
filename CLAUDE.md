@@ -67,7 +67,7 @@ git push
 ### Sheet column order (row 1 = headers, exact names required)
 
 ```
-id | country | iso3 | region | measure_name | pillar | technology_focus | measure_type | crisis_response_typology | date | quantifiable_targets | impact_assessment | measure_description | observed_expected_impact | source_url
+ID | Country | ISO3 | Region | IRENA pillar | Measure name | Measure Description | Technology focus | Measure type | Crisis response typology | Impact assessment | Quantifiable Targets / Capital | Date | Observed / Expected Impact | Link
 ```
 
 ### Adding / editing / deleting entries
@@ -97,37 +97,37 @@ Edit the cron in `.github/workflows/sync-sheets.yml`:
 Each entry in `data.json`:
 ```json
 {
-  "id": 1,
-  "country": "South Korea",
+  "id": 24,
+  "country": "S. Korea",
   "iso3": "KOR",
-  "region": "Asia-Pacific",
-  "measure_name": "100 GW RE Target Acceleration",
-  "pillar": "Renewable Energy",
+  "region": "Asia-Pac",
+  "measure_name": "RE acceleration and 100 GW target",
+  "pillar": "Renewable energy",
   "technology_focus": "Broad RE",
-  "measure_type": "Target / Strategy",
-  "crisis_response_typology": "Accelerated Pivot",
-  "date": "March 2026",
+  "measure_type": "Target / strategy",
+  "crisis_response_typology": "Accelerated pivot",
+  "date": "",
   "quantifiable_targets": "100 GW RE by 2030",
-  "impact_assessment": "Fossil Import Displacement",
-  "measure_description": "Upward revision of national renewable energy generation targets and the systematic removal of local regulatory distance constraints on solar PV installations.",
-  "observed_expected_impact": "Establishes a revised target of 20% renewable generation by 2030, reducing systemic vulnerability following acute Middle Eastern oil supply disruptions.",
+  "impact_assessment": "Fossil import displacement",
+  "measure_description": "Revision of long-term targets and local distance regulations.",
+  "observed_expected_impact": "20% RE in generation by 2030; legislative reform removing local distance restrictions on solar; grid innovation plan within 6 months.",
   "source_url": "https://..."
 }
 ```
 
-Valid `region` values: `Africa` / `Americas` / `Asia-Pacific` / `Europe` / `International` / `Middle East`
+Valid `region` values: `Africa` / `Americas` / `Asia-Pac` / `Europe` / `Intl.` / `MENA`
 
-Valid `pillar` values: `Renewable Energy` / `Electrification` / `Infrastructure` / `Finance & Investment` / `Analysis`
+Valid `pillar` values: `Renewable energy` / `Electrification` / `Energy efficiency` / `Grid & system` / `Analytics`
 
-Valid `crisis_response_typology` values: `Accelerated Pivot` / `Pre-Existing Buffer`
+Valid `crisis_response_typology` values: `Accelerated pivot` / `Pre-existing buffer` / `Emergency measure`
 
-Valid `measure_type` values: `Analysis` / `Emergency Measure` / `Existing Capacity` / `Financing / Strategy` / `Incentive` / `Infrastructure` / `Mandate / Regulation` / `Market Response` / `Target / Strategy`
+Valid `measure_type` values: `Analytical assessment` / `Emergency measure` / `Fiscal incentive` / `Infrastructure / asset` / `Infrastructure inv.` / `Market response` / `Regulatory mandate` / `Target / strategy`
 
-For multilateral organizations (IEA, IRENA, ASEAN, G7 etc.) use `iso3: "INT"` and `region: "International"`.
+For multilateral organizations (IEA, IRENA, ASEAN, G7 etc.) use `iso3: "INT"` and `region: "Intl."`.
 
 ## UI features (current)
 
-**Table columns:** Country · Region · Measure Name · Measure Description · Pillar (badge) · Response Typology (badge) · Impact Assessment · [ + View Details ]
+**Table columns:** Country · IRENA Pillar (badge) · Measure Name · Measure Description · Response Typology (badge) · Impact Assessment · Quantifiable Targets / Capital · [ + View Details ]
 
 **Filter dropdowns:** Region · Pillar · Response Typology · Search (full-text: searches country, measure name, pillar, measure type, impact assessment, description, date)
 

@@ -5,13 +5,15 @@ Usage:
     python sync_from_sheets.py --url "https://docs.google.com/spreadsheets/d/e/PUBLISHED_ID/pub?output=csv"
 
 The sheet must have these columns (row 1 = headers, exact names):
-    id | country | iso3 | region | measure_name | pillar | crisis_response_typology | date
+    ID | Country | ISO3 | Region | IRENA pillar | Measure name |
+    Crisis response typology | Date
 
 Optional columns (read if present, ignored if missing):
-    technology_focus | measure_type | quantifiable_targets | impact_assessment |
-    measure_description | observed_expected_impact | source_url
+    Measure Description | Technology focus | Measure type |
+    Quantifiable Targets / Capital | Impact assessment |
+    Observed / Expected Impact | Link
 
-Rows with an empty 'country' are skipped.
+Rows with an empty 'Country' are skipped.
 The top-level 'last_updated' field in data.json is set to today's date automatically.
 """
 
@@ -26,8 +28,8 @@ from datetime import date
 DATA_FILE = "data.json"
 
 REQUIRED_COLUMNS = [
-    "country", "iso3", "region", "measure_name",
-    "pillar", "crisis_response_typology", "date"
+    "Country", "ISO3", "Region", "Measure name",
+    "IRENA pillar", "Crisis response typology", "Date"
 ]
 
 
@@ -46,24 +48,24 @@ def parse_policies(csv_text):
         sys.exit(1)
 
     for i, row in enumerate(reader, start=1):
-        if not row.get("country", "").strip():
+        if not row.get("Country", "").strip():
             continue  # skip empty rows
         policy = {
-            "id": int(row["id"]) if row.get("id", "").strip().isdigit() else i,
-            "country": row["country"].strip(),
-            "iso3": row["iso3"].strip(),
-            "region": row["region"].strip(),
-            "measure_name": row["measure_name"].strip(),
-            "pillar": row["pillar"].strip(),
-            "technology_focus": row.get("technology_focus", "").strip(),
-            "measure_type": row.get("measure_type", "").strip(),
-            "crisis_response_typology": row["crisis_response_typology"].strip(),
-            "date": row["date"].strip(),
-            "quantifiable_targets": row.get("quantifiable_targets", "").strip(),
-            "impact_assessment": row.get("impact_assessment", "").strip(),
-            "measure_description": row.get("measure_description", "").strip(),
-            "observed_expected_impact": row.get("observed_expected_impact", "").strip(),
-            "source_url": row.get("source_url", "").strip(),
+            "id": int(row["ID"]) if row.get("ID", "").strip().isdigit() else i,
+            "country": row["Country"].strip(),
+            "iso3": row["ISO3"].strip(),
+            "region": row["Region"].strip(),
+            "measure_name": row["Measure name"].strip(),
+            "pillar": row["IRENA pillar"].strip(),
+            "technology_focus": row.get("Technology focus", "").strip(),
+            "measure_type": row.get("Measure type", "").strip(),
+            "crisis_response_typology": row["Crisis response typology"].strip(),
+            "date": row["Date"].strip(),
+            "quantifiable_targets": row.get("Quantifiable Targets / Capital", "").strip(),
+            "impact_assessment": row.get("Impact assessment", "").strip(),
+            "measure_description": row.get("Measure Description", "").strip(),
+            "observed_expected_impact": row.get("Observed / Expected Impact", "").strip(),
+            "source_url": row.get("Link", "").strip(),
         }
         policies.append(policy)
     return policies

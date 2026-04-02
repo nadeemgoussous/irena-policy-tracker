@@ -247,9 +247,10 @@
       font-weight: 700;
       white-space: nowrap;
     }
-    .typology-pivot   { background: #86BC25; color: #fff; }
-    .typology-buffer  { background: #0073AE; color: #fff; }
-    .typology-default { background: #8F8085; color: #fff; }
+    .typology-pivot     { background: #86BC25; color: #fff; }
+    .typology-buffer    { background: #0073AE; color: #fff; }
+    .typology-emergency { background: #B83318; color: #fff; }
+    .typology-default   { background: #8F8085; color: #fff; }
 
     /* ── Measure Type badges — used in modal metadata ── */
     .badge {
@@ -567,29 +568,30 @@
         <option value="">All Regions</option>
         <option>Africa</option>
         <option>Americas</option>
-        <option>Asia-Pacific</option>
+        <option>Asia-Pac</option>
         <option>Europe</option>
-        <option>International</option>
-        <option>Middle East</option>
+        <option>Intl.</option>
+        <option>MENA</option>
       </select>
     </div>
     <div class="filter-group">
       <label for="filter-pillar">Pillar</label>
       <select id="filter-pillar">
         <option value="">All Pillars</option>
-        <option>Renewable Energy</option>
+        <option>Renewable energy</option>
         <option>Electrification</option>
-        <option>Infrastructure</option>
-        <option>Finance &amp; Investment</option>
-        <option>Analysis</option>
+        <option>Energy efficiency</option>
+        <option>Grid &amp; system</option>
+        <option>Analytics</option>
       </select>
     </div>
     <div class="filter-group">
       <label for="filter-typology">Response Typology</label>
       <select id="filter-typology">
         <option value="">All Typologies</option>
-        <option>Accelerated Pivot</option>
-        <option>Pre-Existing Buffer</option>
+        <option>Accelerated pivot</option>
+        <option>Pre-existing buffer</option>
+        <option>Emergency measure</option>
       </select>
     </div>
     <div class="filter-group search-group">
@@ -651,12 +653,12 @@
         <thead>
           <tr>
             <th data-col="country">Country<span class="sort-icon"></span></th>
-            <th data-col="region">Region<span class="sort-icon"></span></th>
+            <th data-col="pillar">IRENA Pillar<span class="sort-icon"></span></th>
             <th data-col="measure_name">Measure Name<span class="sort-icon"></span></th>
             <th class="no-sort">Measure Description</th>
-            <th data-col="pillar">Pillar<span class="sort-icon"></span></th>
             <th data-col="crisis_response_typology">Response Typology<span class="sort-icon"></span></th>
             <th class="no-sort">Impact Assessment</th>
+            <th class="no-sort">Quantifiable Targets / Capital</th>
             <th class="no-sort">Details</th>
           </tr>
         </thead>
@@ -720,53 +722,54 @@ function policyColor(count) {
 
 function pillarBadgeClass(p) {
   switch (p) {
-    case 'Renewable Energy':    return 'pillar-re';
+    case 'Renewable energy':    return 'pillar-re';
     case 'Electrification':     return 'pillar-elec';
-    case 'Infrastructure':      return 'pillar-infra';
-    case 'Finance & Investment':return 'pillar-finance';
-    case 'Analysis':            return 'pillar-analysis';
+    case 'Energy efficiency':   return 'pillar-finance';
+    case 'Grid & system':       return 'pillar-infra';
+    case 'Analytics':           return 'pillar-analysis';
     default:                    return 'pillar-default';
   }
 }
 
 function pillarEmoji(p) {
   switch (p) {
-    case 'Renewable Energy':    return '☀️';
+    case 'Renewable energy':    return '☀️';
     case 'Electrification':     return '⚡';
-    case 'Infrastructure':      return '🏗️';
-    case 'Finance & Investment':return '💰';
-    case 'Analysis':            return '📊';
+    case 'Energy efficiency':   return '💡';
+    case 'Grid & system':       return '🏗️';
+    case 'Analytics':           return '📊';
     default:                    return '';
   }
 }
 
 function typologyBadgeClass(t) {
   switch (t) {
-    case 'Accelerated Pivot':   return 'typology-pivot';
-    case 'Pre-Existing Buffer': return 'typology-buffer';
+    case 'Accelerated pivot':   return 'typology-pivot';
+    case 'Pre-existing buffer': return 'typology-buffer';
+    case 'Emergency measure':   return 'typology-emergency';
     default:                    return 'typology-default';
   }
 }
 
 function typologyEmoji(t) {
   switch (t) {
-    case 'Accelerated Pivot':   return '🟢';
-    case 'Pre-Existing Buffer': return '🔵';
+    case 'Accelerated pivot':   return '🟢';
+    case 'Pre-existing buffer': return '🔵';
+    case 'Emergency measure':   return '🔴';
     default:                    return '';
   }
 }
 
 function typeBadgeClass(t) {
   switch (t) {
-    case 'Emergency Measure':    return 'badge-emergency';
-    case 'Target / Strategy':    return 'badge-target';
-    case 'Market Response':      return 'badge-market';
-    case 'Existing Capacity':    return 'badge-existing';
-    case 'Analysis':             return 'badge-analysis';
-    case 'Mandate / Regulation': return 'badge-mandate';
-    case 'Infrastructure':       return 'badge-infra';
-    case 'Incentive':            return 'badge-incentive';
-    case 'Financing / Strategy': return 'badge-finance';
+    case 'Emergency measure':    return 'badge-emergency';
+    case 'Target / strategy':    return 'badge-target';
+    case 'Market response':      return 'badge-market';
+    case 'Infrastructure / asset':return 'badge-existing';
+    case 'Analytical assessment':return 'badge-analysis';
+    case 'Regulatory mandate':   return 'badge-mandate';
+    case 'Infrastructure inv.':  return 'badge-infra';
+    case 'Fiscal incentive':     return 'badge-incentive';
     default:                     return 'badge-analysis';
   }
 }
@@ -809,7 +812,7 @@ async function init() {
   // Stats
   document.getElementById('stat-total').textContent     = data.policies.length;
   document.getElementById('stat-countries').textContent = new Set(data.policies.map(p => p.iso3)).size;
-  document.getElementById('stat-emergency').textContent = data.policies.filter(p => p.crisis_response_typology === 'Accelerated Pivot').length;
+  document.getElementById('stat-emergency').textContent = data.policies.filter(p => p.crisis_response_typology === 'Accelerated pivot').length;
   document.getElementById('stat-sectors').textContent   = new Set(data.policies.map(p => p.pillar).filter(Boolean)).size;
 
   drawMap(world);
@@ -1022,12 +1025,12 @@ function renderTable() {
     return `
     <tr data-iso3="${esc(p.iso3)}" data-id="${p.id}" class="${p.iso3 === state.selectedCountry ? 'highlighted' : ''}">
       <td class="country-cell">${esc(p.country)}</td>
-      <td>${esc(p.region)}</td>
+      <td><span class="pillar-badge ${pillarBadgeClass(p.pillar)}">${pillarEmoji(p.pillar)} ${esc(p.pillar || '')}</span></td>
       <td><strong>${esc(name)}</strong></td>
       <td class="desc-cell">${descShort}</td>
-      <td><span class="pillar-badge ${pillarBadgeClass(p.pillar)}">${pillarEmoji(p.pillar)} ${esc(p.pillar || '')}</span></td>
       <td><span class="typology-badge ${typologyBadgeClass(p.crisis_response_typology)}">${typologyEmoji(p.crisis_response_typology)} ${esc(p.crisis_response_typology || '')}</span></td>
       <td style="font-size:12px;color:#555">${esc(p.impact_assessment || '')}</td>
+      <td style="font-size:12px;color:#555">${esc(p.quantifiable_targets || '')}</td>
       <td><button class="btn-view-details" data-id="${p.id}">+ View Details</button></td>
     </tr>`;
   }).join('');

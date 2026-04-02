@@ -8,9 +8,11 @@ Outputs:
     policies_for_sheets.csv  — open in Excel/Sheets or File > Import in Google Sheets
 
 Column order matches what sync_from_sheets.py expects:
-    id, country, iso3, region, measure_name, pillar, technology_focus,
-    measure_type, crisis_response_typology, date, quantifiable_targets,
-    impact_assessment, measure_description, observed_expected_impact, source_url
+    ID, Country, ISO3, Region, IRENA pillar, Measure name,
+    Measure Description, Technology focus, Measure type,
+    Crisis response typology, Impact assessment,
+    Quantifiable Targets / Capital, Date,
+    Observed / Expected Impact, Link
 
 NOTE: This script migrates old-schema data.json fields to the new ECTT schema.
       New fields (pillar, crisis_response_typology, impact_assessment, etc.) are
@@ -24,11 +26,11 @@ DATA_FILE = "data.json"
 OUTPUT_FILE = "policies_for_sheets.csv"
 
 COLUMNS = [
-    "id", "country", "iso3", "region",
-    "measure_name", "pillar", "technology_focus", "measure_type",
-    "crisis_response_typology", "date", "quantifiable_targets",
-    "impact_assessment", "measure_description", "observed_expected_impact",
-    "source_url"
+    "ID", "Country", "ISO3", "Region",
+    "IRENA pillar", "Measure name", "Measure Description",
+    "Technology focus", "Measure type", "Crisis response typology",
+    "Impact assessment", "Quantifiable Targets / Capital", "Date",
+    "Observed / Expected Impact", "Link"
 ]
 
 # Best-effort mapping from old sector values to new Pillar values.
@@ -43,25 +45,23 @@ SECTOR_TO_PILLAR = {
 
 
 def migrate(p):
-    """Map an old-schema policy record to the new ECTT schema."""
+    """Map a data.json policy record to the Google Sheet column names."""
     return {
-        "id":                      p.get("id", ""),
-        "country":                 p.get("country", ""),
-        "iso3":                    p.get("iso3", ""),
-        "region":                  p.get("region", ""),
-        # Renamed fields
-        "measure_name":            p.get("measure_name") or p.get("policy_name", ""),
-        "pillar":                  p.get("pillar") or SECTOR_TO_PILLAR.get(p.get("sector", ""), ""),
-        "technology_focus":        p.get("technology_focus", ""),
-        "measure_type":            p.get("measure_type") or p.get("policy_type", ""),
-        # New fields — placeholder for manual entry in Sheets
-        "crisis_response_typology":p.get("crisis_response_typology", ""),
-        "date":                    p.get("date", ""),
-        "quantifiable_targets":    p.get("quantifiable_targets") or p.get("quantitative_details", ""),
-        "impact_assessment":       p.get("impact_assessment", ""),
-        "measure_description":     p.get("measure_description") or p.get("description", ""),
-        "observed_expected_impact":p.get("observed_expected_impact") or p.get("impacts", ""),
-        "source_url":              p.get("source_url", ""),
+        "ID":                             p.get("id", ""),
+        "Country":                        p.get("country", ""),
+        "ISO3":                           p.get("iso3", ""),
+        "Region":                         p.get("region", ""),
+        "IRENA pillar":                   p.get("pillar") or SECTOR_TO_PILLAR.get(p.get("sector", ""), ""),
+        "Measure name":                   p.get("measure_name") or p.get("policy_name", ""),
+        "Measure Description":            p.get("measure_description") or p.get("description", ""),
+        "Technology focus":               p.get("technology_focus", ""),
+        "Measure type":                   p.get("measure_type") or p.get("policy_type", ""),
+        "Crisis response typology":       p.get("crisis_response_typology", ""),
+        "Impact assessment":              p.get("impact_assessment", ""),
+        "Quantifiable Targets / Capital":  p.get("quantifiable_targets") or p.get("quantitative_details", ""),
+        "Date":                           p.get("date", ""),
+        "Observed / Expected Impact":     p.get("observed_expected_impact") or p.get("impacts", ""),
+        "Link":                           p.get("source_url", ""),
     }
 
 
@@ -78,8 +78,8 @@ def main():
         writer.writeheader()
         writer.writerows(rows)
 
-    empty_pillar = sum(1 for r in rows if not r["pillar"])
-    empty_typology = sum(1 for r in rows if not r["crisis_response_typology"])
+    empty_pillar = sum(1 for r in rows if not r["IRENA pillar"])
+    empty_typology = sum(1 for r in rows if not r["Crisis response typology"])
 
     print(f"Exported {len(rows)} rows to {OUTPUT_FILE}")
     print()
