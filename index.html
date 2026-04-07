@@ -1121,7 +1121,7 @@ function openModal(p) {
   if (p.iso3 && p.iso3 !== 'INT' && p.iso3 !== 'EUU') {
     footerParts.push(`<button class="modal-btn" data-iso3="${esc(p.iso3)}" data-country="${esc(p.country)}">⊙ Filter by country</button>`);
   }
-  if (p.date) footerParts.push(`<span class="modal-date">${esc(p.date)}</span>`);
+  if (p.date) footerParts.push(`<span class="modal-date">Last accessed: ${esc(p.date)}</span>`);
   const footer = document.getElementById('modal-footer');
   footer.innerHTML = footerParts.join('');
   footer.querySelector('[data-iso3]')?.addEventListener('click', e => {
