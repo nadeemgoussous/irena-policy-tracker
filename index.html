@@ -519,6 +519,10 @@
     .embedded .header,
     .embedded .hero { display: none; }
   </style>
+  <script>
+  // Detect iframe embed before body renders to avoid flash of header/hero
+  if (window.self !== window.top) document.documentElement.classList.add('embedded');
+  </script>
 </head>
 <body>
 
@@ -696,11 +700,6 @@
 </footer>
 
 <script>
-// ── Embed mode (hide header + hero when in iframe) ────────────────────────
-if (window.self !== window.top) {
-  document.documentElement.classList.add('embedded');
-}
-
 // ── State ──────────────────────────────────────────────────────────────────
 const state = {
   allPolicies:         [],
