@@ -499,6 +499,7 @@
       transition: background .15s;
     }
     .modal-btn-link:hover { background: var(--irena-teal-light); }
+    .modal-date { margin-left: auto; font-size: 13px; color: var(--irena-grey-dark); }
     .modal-btn {
       display: inline-flex;
       align-items: center;
@@ -1087,7 +1088,7 @@ function openModal(p) {
   if (p.pillar)           tags.push(`<span class="modal-tag"><span class="modal-tag-label">Pillar</span><span class="pillar-badge ${pillarBadgeClass(p.pillar)}">${pillarEmoji(p.pillar)} ${esc(p.pillar)}</span></span>`);
   if (p.technology_focus) tags.push(`<span class="modal-tag"><span class="modal-tag-label">Technology Focus</span>${esc(p.technology_focus)}</span>`);
   if (p.measure_type)     tags.push(`<span class="modal-tag"><span class="modal-tag-label">Measure Type</span><span class="badge ${typeBadgeClass(p.measure_type)}">${esc(p.measure_type)}</span></span>`);
-  if (p.date)             tags.push(`<span class="modal-tag"><span class="modal-tag-label">Date</span>${esc(p.date)}</span>`);
+  // date shown in modal footer
   if (tags.length) parts.push(`<div class="modal-tag-row">${tags.join('')}</div>`);
 
   // [SECTION 1: Analytical Classification]
@@ -1120,6 +1121,7 @@ function openModal(p) {
   if (p.iso3 && p.iso3 !== 'INT' && p.iso3 !== 'EUU') {
     footerParts.push(`<button class="modal-btn" data-iso3="${esc(p.iso3)}" data-country="${esc(p.country)}">⊙ Filter by country</button>`);
   }
+  if (p.date) footerParts.push(`<span class="modal-date">${esc(p.date)}</span>`);
   const footer = document.getElementById('modal-footer');
   footer.innerHTML = footerParts.join('');
   footer.querySelector('[data-iso3]')?.addEventListener('click', e => {
