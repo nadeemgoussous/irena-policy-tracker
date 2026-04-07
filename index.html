@@ -514,6 +514,10 @@
       transition: all .15s;
     }
     .modal-btn:hover { border-color: var(--irena-teal); color: var(--irena-teal); }
+
+    /* Embed mode — hide header & hero when inside an iframe */
+    .embedded .header,
+    .embedded .hero { display: none; }
   </style>
 </head>
 <body>
@@ -692,6 +696,11 @@
 </footer>
 
 <script>
+// ── Embed mode (hide header + hero when in iframe) ────────────────────────
+if (window.self !== window.top) {
+  document.documentElement.classList.add('embedded');
+}
+
 // ── State ──────────────────────────────────────────────────────────────────
 const state = {
   allPolicies:         [],
