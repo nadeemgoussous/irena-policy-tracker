@@ -1112,7 +1112,8 @@ function openModal(p) {
   document.getElementById('modal-body').innerHTML = parts.join('');
 
   const footerParts = [];
-  const url = p.source_url || '';
+  let url = (p.source_url || '').trim();
+  if (url && !url.startsWith('http://') && !url.startsWith('https://')) url = 'https://' + url;
   if (url.startsWith('http://') || url.startsWith('https://')) {
     footerParts.push(`<a class="modal-btn-link" href="${esc(url)}" target="_blank" rel="noopener">↗ Source</a>`);
   }
