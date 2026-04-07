@@ -152,6 +152,8 @@
     .country-path { stroke: #fff; stroke-width: 0.5px; cursor: pointer; transition: opacity .15s; }
     .country-path:hover { opacity: 0.8; }
     .country-path.selected { stroke: var(--irena-teal); stroke-width: 2px; }
+    .country-path.map-highlight { stroke: var(--irena-teal); stroke-width: 2.5px; fill: #E0F4FD !important; animation: map-pulse 1.5s ease-in-out; }
+    @keyframes map-pulse { 0%,100% { stroke-width: 2.5px; } 50% { stroke-width: 4px; } }
 
     /* ── Tooltip ── */
     #tooltip {
@@ -618,27 +620,6 @@
     <button id="btn-deselect" title="Clear country selection">✕ Clear</button>
   </div>
 
-  <!-- Map -->
-  <div class="map-card">
-    <h2>
-      Policy Distribution by Country
-      <span class="map-note">— click a country to filter the table</span>
-    </h2>
-    <div id="map-container">
-      <svg id="map-svg" viewBox="0 0 960 480" preserveAspectRatio="xMidYMid meet"></svg>
-    </div>
-    <p style="font-size:11px;color:var(--irena-grey-dark);margin-top:10px;line-height:1.5;font-style:italic;">The geographic designations and presentation of data on this map are for informational purposes only. They do not imply the expression of any opinion on the part of IRENA concerning the legal status of any country, territory, or area, nor the delimitation of its frontiers or boundaries.</p>
-    <div class="map-legend">
-      <span class="legend-label">Measures:</span>
-      <div class="legend-item"><div class="legend-swatch" style="background:#D0D0D0"></div> 0</div>
-      <div class="legend-item"><div class="legend-swatch" style="background:#B8DFF5"></div> 1–2</div>
-      <div class="legend-item"><div class="legend-swatch" style="background:#5AB8E8"></div> 3–5</div>
-      <div class="legend-item"><div class="legend-swatch" style="background:#0073AE"></div> 6–9</div>
-      <div class="legend-item"><div class="legend-swatch" style="background:#005A8C"></div> 10+</div>
-      <div style="margin-left:20px" class="legend-item"><div class="legend-swatch" style="background:#E0F4FD;border:2px solid #00A3E0"></div> Selected</div>
-    </div>
-  </div>
-
   <!-- Multilateral & Regional Organisations -->
   <div class="org-panel" id="org-panel">
     <h2>Multilateral &amp; Regional Organisations <span style="font-weight:400;color:#888;text-transform:none;letter-spacing:0;font-size:11px">(not shown on map — click to filter table)</span></h2>
@@ -675,6 +656,27 @@
       </table>
     </div>
     <div class="pagination" id="pagination"></div>
+  </div>
+
+  <!-- Map -->
+  <div class="map-card">
+    <h2>
+      Policy Distribution by Country
+      <span class="map-note">— click a country to filter the table</span>
+    </h2>
+    <div id="map-container">
+      <svg id="map-svg" viewBox="0 0 960 480" preserveAspectRatio="xMidYMid meet"></svg>
+    </div>
+    <p style="font-size:11px;color:var(--irena-grey-dark);margin-top:10px;line-height:1.5;font-style:italic;">The geographic designations and presentation of data on this map are for informational purposes only. They do not imply the expression of any opinion on the part of IRENA concerning the legal status of any country, territory, or area, nor the delimitation of its frontiers or boundaries.</p>
+    <div class="map-legend">
+      <span class="legend-label">Measures:</span>
+      <div class="legend-item"><div class="legend-swatch" style="background:#D0D0D0"></div> 0</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#B8DFF5"></div> 1–2</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#5AB8E8"></div> 3–5</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#0073AE"></div> 6–9</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#005A8C"></div> 10+</div>
+      <div style="margin-left:20px" class="legend-item"><div class="legend-swatch" style="background:#E0F4FD;border:2px solid #00A3E0"></div> Selected</div>
+    </div>
   </div>
 </div>
 
@@ -901,6 +903,20 @@ function drawMap(world) {
   state._countriesData = countries.features;
 }
 
+function highlightCountryOnMap(iso3) {
+  if (!iso3 || iso3 === 'INT' || iso3 === 'EUU') return;
+  // Passive highlight — just visually pulse the country, no filtering
+  d3.selectAll('.country-path')
+    .classed('map-highlight', false)
+    .filter(function() { return this.getAttribute('data-iso3') === iso3; })
+    .classed('map-highlight', true);
+  // Auto-clear highlight after 3 seconds
+  clearTimeout(state._highlightTimer);
+  state._highlightTimer = setTimeout(() => {
+    d3.selectAll('.country-path').classed('map-highlight', false);
+  }, 3000);
+}
+
 function updateMapColors() {
   d3.selectAll('.country-path').attr('fill', function() {
     const iso3 = this.getAttribute('data-iso3');
@@ -1050,7 +1066,11 @@ function renderTable() {
     if (!row) return;
     const id     = parseInt(row.dataset.id);
     const policy = state.allPolicies.find(p => p.id === id);
-    if (policy) openModal(policy);
+    if (policy) {
+      // Highlight country on map when a row is clicked
+      highlightCountryOnMap(policy.iso3);
+      openModal(policy);
+    }
   };
 
   document.querySelectorAll('thead th[data-col]').forEach(th => {
