@@ -15,7 +15,7 @@
       "quantifiable_targets": "60%+ RE electricity",
       "impact_assessment": "Wholesale price deflation",
       "measure_description": "Utilizing existing RE capacity to stabilize market pricing.",
-      "observed_expected_impact": "Wholesale prices €37–57/MWh vs €113 Germany, €141 Italy; gas sets price only 15% of time vs 89% in Italy.",
+      "observed_expected_impact": "Regional wholesale electricity prices expose severe competitive divides. Local prices range from €37 to €57 per megawatt-hour. This sharply undercuts Germany at €113 and Italy at €141. Natural gas dictates the marginal price during only 15% of trading hours, compared to 89% in the Italian market.",
       "source_url": "www.irena.org"
     },
     {
@@ -32,7 +32,7 @@
       "quantifiable_targets": "€5B total",
       "impact_assessment": "Retail price insulation",
       "measure_description": "Comprehensive crisis response package targeting end-use energy costs and grid tolls.",
-      "observed_expected_impact": "VAT on energy cut 21%→10%; electricity bills cut 13%; 80% grid toll reduction for energy-intensive industry (~€200M savings).",
+      "observed_expected_impact": "The government reduced the value-added tax on energy from 21% to 10%. This policy cut overall electricity bills by 13%. Energy-intensive industries secured an 80% reduction in grid tolls, yielding approximately €200 million in structural savings.",
       "source_url": "www.irena.org"
     },
     {
@@ -49,7 +49,7 @@
       "quantifiable_targets": "N/A",
       "impact_assessment": "Retail price insulation",
       "measure_description": "Inclusion of household clean tech incentives within the €5B crisis package.",
-      "observed_expected_impact": "Massive income tax deductions for rooftop solar, EV charging points, heat pumps; accelerated RE permitting.",
+      "observed_expected_impact": "Policymakers introduced substantial income tax deductions for rooftop solar installations, electric vehicle charging infrastructure, and heat pumps. Authorities also accelerated the permitting processes for renewable energy projects.",
       "source_url": "www.irena.org"
     },
     {
@@ -66,7 +66,7 @@
       "quantifiable_targets": "€75B EIB financing",
       "impact_assessment": "Fossil import displacement",
       "measure_description": "Major financing strategy targeting grid operations and clean energy capacity.",
-      "observed_expected_impact": "€500M equity fund for grid operators; €500M pilot for 'energy efficiency as a service'; €200M InvestEU for SMRs.",
+      "observed_expected_impact": "Financial commitments include a €500 million equity fund for grid operators and a parallel €500 million pilot program testing energy efficiency as a service. InvestEU allocated a further €200 million to advance small modular reactor technology.",
       "source_url": "www.irena.org"
     },
     {
@@ -83,7 +83,7 @@
       "quantifiable_targets": "42.5% RE by 2030",
       "impact_assessment": "Fossil import displacement",
       "measure_description": "Expedited consultation on post-2030 frameworks ahead of 2026 legislative proposals.",
-      "observed_expected_impact": "RE reached 25.2% of energy (2024), ~48% of electricity (2025).",
+      "observed_expected_impact": "Renewable sources supplied 25.2% of total final energy consumption in 2024. By 2025, renewables generated approximately 48% of the total electricity mix.",
       "source_url": "www.irena.org"
     },
     {
@@ -100,7 +100,7 @@
       "quantifiable_targets": "90% emissions reduction",
       "impact_assessment": "Retail price insulation",
       "measure_description": "Framework adjustment for long-term emission reductions.",
-      "observed_expected_impact": "Streamlining energy efficiency rules to support 90% emissions reduction by 2040.",
+      "observed_expected_impact": "Regulators are streamlining energy efficiency mandates. This regulatory consolidation directly supports the statutory target of reducing emissions by 90% by 2040.",
       "source_url": "www.irena.org"
     },
     {
@@ -117,7 +117,7 @@
       "quantifiable_targets": "€1.2T allocated",
       "impact_assessment": "Grid resilience & security",
       "measure_description": "Cross-border and domestic grid financing package.",
-      "observed_expected_impact": "500+ GW new RE capacity; 8 cross-border 'Energy Highways'; 180 new transmission projects, 51 storage projects.",
+      "observed_expected_impact": "The infrastructure pipeline includes over 500 gigawatts of new renewable capacity and eight cross-border transmission corridors. Planners also approved 180 new domestic transmission upgrades and 51 dedicated energy storage projects.",
       "source_url": "www.irena.org"
     },
     {
@@ -134,7 +134,7 @@
       "quantifiable_targets": "40% jump in EV inquiries",
       "impact_assessment": "Retail price insulation",
       "measure_description": "Observed surge in private consumer demand for household transition technology.",
-      "observed_expected_impact": "E.ON solar inquiries doubled; 1KOMMA5° demand doubled vs prior month; Enpal demand at 2022 gas crisis levels.",
+      "observed_expected_impact": "Consumer demand for distributed energy solutions expanded rapidly. E.ON reported a doubling of solar inquiries. Demand at 1KOMMA5° doubled month-over-month, and Enpal registered customer interest matching the peak levels of the 2022 gas crisis.",
       "source_url": "www.irena.org"
     },
     {
@@ -151,7 +151,7 @@
       "quantifiable_targets": "Up to 18 wind farms eligible",
       "impact_assessment": "Wholesale price deflation",
       "measure_description": "Expedited auction timeline for renewable allocation.",
-      "observed_expected_impact": "AR8 brought forward to Jul 2026; prior AR7 secured 14.7 GW across 201 projects, saving UK ~£4B/yr at current gas prices.",
+      "observed_expected_impact": "The government advanced Allocation Round 8 to July 2026. The previous auction secured 14.7 gigawatts of capacity across 201 projects. At current natural gas prices, this deployed capacity saves the United Kingdom approximately £4 billion annually.",
       "source_url": "www.irena.org"
     },
     {
@@ -168,7 +168,7 @@
       "quantifiable_targets": "All new homes",
       "impact_assessment": "Retail price insulation",
       "measure_description": "Mandate for low-carbon tech in new residential construction.",
-      "observed_expected_impact": "All new homes in England to include solar panels + heat pumps from 2028; plug-in solar panels to retail shops within months.",
+      "observed_expected_impact": "Building codes require all new residential construction in England to incorporate solar panels and heat pumps starting in 2028. Retailers begin selling plug-in solar panels directly to consumers within months.",
       "source_url": "www.irena.org"
     },
     {
@@ -185,7 +185,7 @@
       "quantifiable_targets": "Up to £150M",
       "impact_assessment": "Fossil import displacement",
       "measure_description": "Strategic funding for maritime transport decarbonization.",
-      "observed_expected_impact": "Capital allocated for zero-emission vessel development and deployment.",
+      "observed_expected_impact": "The state allocated targeted capital to accelerate the research, development, and commercial deployment of zero-emission maritime vessels.",
       "source_url": "www.irena.org"
     },
     {
@@ -202,7 +202,7 @@
       "quantifiable_targets": "4% vs 59% bill rise",
       "impact_assessment": "Retail price insulation",
       "measure_description": "Macroeconomic modeling of Net Zero vs fossil price shocks.",
-      "observed_expected_impact": "Total cost of net zero by 2050 'no greater than the cost of a single fossil fuel price shock'.",
+      "observed_expected_impact": "Economic models indicate the aggregate capital requirement to achieve net-zero emissions by 2050 equals the financial damage inflicted by a single global fossil fuel price shock.",
       "source_url": "www.irena.org"
     },
     {
@@ -219,7 +219,7 @@
       "quantifiable_targets": "€15.77/100 kWh charging cost",
       "impact_assessment": "Retail price insulation",
       "measure_description": "Consumer vehicle market reaction to regional energy pricing.",
-      "observed_expected_impact": "Used EV 'bonanza' on Finn.no marketplace; electricity costs €15.77 vs €35.23 in Germany.",
+      "observed_expected_impact": "The secondary market for electric vehicles expanded rapidly on the Finn.no platform. Local electricity costs of €15.77 per megawatt-hour provide a distinct operational advantage against the €35.23 rate in Germany.",
       "source_url": "www.irena.org"
     },
     {
@@ -236,7 +236,7 @@
       "quantifiable_targets": "51 GW solar panels imported",
       "impact_assessment": "Sovereign forex protection",
       "measure_description": "Heavy deployment of imported solar modules bypassing central grid reliance.",
-      "observed_expected_impact": "Solar provides ~20–25% of electricity; $12B oil/gas imports avoided since 2020; projected additional $6.3B savings in 2026.",
+      "observed_expected_impact": "Solar generation currently meets 20% to 25% of total electricity demand. This displacement avoided $12 billion in fossil fuel imports since 2020 and projects an additional $6.3 billion in savings during 2026.",
       "source_url": "www.irena.org"
     },
     {
@@ -253,7 +253,7 @@
       "quantifiable_targets": "Export-import gap ~2:1",
       "impact_assessment": "Grid resilience & security",
       "measure_description": "Adjustment to net-metering contracts for distributed generation.",
-      "observed_expected_impact": "Net metering shifted to net billing; standard agreement cut from 7 to 5 years.",
+      "observed_expected_impact": "Regulators transitioned the distributed generation compensation model from net metering to net billing. They also reduced the standard duration of connection agreements from seven years to five years.",
       "source_url": "www.irena.org"
     },
     {
@@ -270,7 +270,7 @@
       "quantifiable_targets": "8M units power increase",
       "impact_assessment": "Retail price insulation",
       "measure_description": "Consumer and localized state shift toward electric cooking amid gas shortages.",
-      "observed_expected_impact": "E-cooking now ~20% cheaper than LPG; ₹2/unit electricity subsidy for eateries switching to induction.",
+      "observed_expected_impact": "Electric cooking operates at a 20% cost discount compared to liquefied petroleum gas. To accelerate adoption, the government introduced a subsidy of ₹2 per unit of electricity for commercial eateries transitioning to induction stoves.",
       "source_url": "www.irena.org"
     },
     {
@@ -287,7 +287,7 @@
       "quantifiable_targets": "266 GW installed RE",
       "impact_assessment": "Wholesale price deflation",
       "measure_description": "Status of baseline domestic renewable generation capacity.",
-      "observed_expected_impact": "Solar alone ~143 GW; 500 GW target by 2030; ~35 GW faces curtailment risk from grid bottlenecks.",
+      "observed_expected_impact": "Installed solar capacity reached 143 gigawatts, tracking toward a national target of 500 gigawatts by 2030. Inadequate grid infrastructure exposes approximately 35 gigawatts of this capacity to severe curtailment risk.",
       "source_url": "www.irena.org"
     },
     {
@@ -304,7 +304,7 @@
       "quantifiable_targets": "100 GW RE by 2030",
       "impact_assessment": "Fossil import displacement",
       "measure_description": "Revision of long-term targets and local distance regulations.",
-      "observed_expected_impact": "20% RE in generation by 2030; legislative reform removing local distance restrictions on solar; grid innovation plan within 6 months.",
+      "observed_expected_impact": "The state established a 20% renewable generation target for 2030. Lawmakers passed reforms eliminating local distance restrictions on solar installations and mandated the delivery of a comprehensive grid innovation plan within six months.",
       "source_url": "www.irena.org"
     },
     {
@@ -321,7 +321,7 @@
       "quantifiable_targets": "3 GW new capacity",
       "impact_assessment": "Grid resilience & security",
       "measure_description": "Physical grid expansion targeting heavy industry sectors.",
-      "observed_expected_impact": "Transmission capacity established beneath planned highway corridor to Yongin semiconductor cluster.",
+      "observed_expected_impact": "Engineers integrated high-capacity transmission lines directly beneath the planned highway corridor serving the Yongin semiconductor manufacturing cluster.",
       "source_url": "www.irena.org"
     },
     {
@@ -338,7 +338,7 @@
       "quantifiable_targets": "~5.8–6 GW added",
       "impact_assessment": "Fossil import displacement",
       "measure_description": "Market tracking of ongoing solar deployment.",
-      "observed_expected_impact": "Passing 100 GW cumulative capacity; solar + wind reaching 11% of total energy.",
+      "observed_expected_impact": "The power system surpassed 100 gigawatts of cumulative installed capacity. Combined generation from solar and wind assets accounts for 11% of total energy production.",
       "source_url": "www.irena.org"
     },
     {
@@ -355,7 +355,7 @@
       "quantifiable_targets": "45 days reserves remaining",
       "impact_assessment": "Grid resilience & security",
       "measure_description": "Response measures promoting distributed generation amid reserve drops.",
-      "observed_expected_impact": "First country to declare energy emergency; rooftop solar + storage promoted for diesel-dependent areas.",
+      "observed_expected_impact": "The national government declared an energy emergency. Authorities actively promote the deployment of rooftop solar and battery storage to replace generation in areas heavily dependent on diesel fuel.",
       "source_url": "www.irena.org"
     },
     {
@@ -372,7 +372,7 @@
       "quantifiable_targets": "97% RE potential untapped",
       "impact_assessment": "Fossil import displacement",
       "measure_description": "Expediting untapped domestic renewable reserves.",
-      "observed_expected_impact": "Speeding up solar and geothermal integration into the national energy plan.",
+      "observed_expected_impact": "Planners accelerated the integration timelines for utility-scale solar and geothermal assets within the national energy strategy.",
       "source_url": "www.irena.org"
     },
     {
@@ -389,7 +389,7 @@
       "quantifiable_targets": "N/A",
       "impact_assessment": "Sovereign forex protection",
       "measure_description": "Fuel substitution measures leveraging existing solar and biofuels.",
-      "observed_expected_impact": "Solar saves 'hundreds of millions of dollars' in potential coal/gas imports; E10 gasoline rollout accelerated; zero fuel taxes until Apr 15.",
+      "observed_expected_impact": "Solar generation displaced hundreds of millions of dollars in required coal and natural gas imports. Concurrently, the government accelerated the rollout of E10 blended gasoline and suspended all fuel taxes until April 15.",
       "source_url": "www.irena.org"
     },
     {
@@ -406,7 +406,7 @@
       "quantifiable_targets": "N/A",
       "impact_assessment": "Sovereign forex protection",
       "measure_description": "Vehicle procurement mandates acting as fuel demand reduction.",
-      "observed_expected_impact": "Slashed EV service fees; ordered govt agencies not to buy new gas vehicles; 3-day school week; 4-day workweek.",
+      "observed_expected_impact": "The state eliminated service fees for electric vehicles and prohibited government agencies from purchasing internal combustion engine vehicles. Authorities implemented a three-day school week and a four-day workweek to curtail energy consumption aggressively.",
       "source_url": "www.irena.org"
     },
     {
@@ -423,7 +423,7 @@
       "quantifiable_targets": "~33% of petrol stations shut",
       "impact_assessment": "Sovereign forex protection",
       "measure_description": "State measures promoting EVs amid physical fuel station closures.",
-      "observed_expected_impact": "Strict fuel efficiency for state bodies; fuel prices rose 68%; electric mobility actively promoted.",
+      "observed_expected_impact": "Regulators imposed strict fuel efficiency standards on all state institutions. Retail fuel prices surged by 68%, prompting the government to subsidize and promote electric mobility alternatives actively.",
       "source_url": "www.irena.org"
     },
     {
@@ -440,7 +440,7 @@
       "quantifiable_targets": "45% RE/storage main grid",
       "impact_assessment": "Retail price insulation",
       "measure_description": "Macroeconomic analysis of existing domestic resilience parameters.",
-      "observed_expected_impact": "4M+ households with solar; 454,000 EVs on road; FBT EV exemption costs $9.7B over 2026–30.",
+      "observed_expected_impact": "Distributed solar adoption exceeded four million households, and the national fleet reached 454,000 electric vehicles. The fringe benefits tax exemption for electric vehicles costs the treasury $9.7 billion between 2026 and 2030.",
       "source_url": "www.irena.org"
     },
     {
@@ -457,7 +457,7 @@
       "quantifiable_targets": "95% renewable electricity",
       "impact_assessment": "Sovereign forex protection",
       "measure_description": "Ongoing market transition relying on structural regulatory bans.",
-      "observed_expected_impact": "Banned gasoline/diesel car imports (2024); EVs grew 1%→6% of market.",
+      "observed_expected_impact": "The government banned the importation of gasoline and diesel vehicles in 2024. Following this mandate, electric vehicles expanded their total market share from 1% to 6%.",
       "source_url": "www.irena.org"
     },
     {
@@ -474,7 +474,7 @@
       "quantifiable_targets": "Bill tripled to $1.65B",
       "impact_assessment": "Sovereign forex protection",
       "measure_description": "Forced demand destruction and building efficiency measures.",
-      "observed_expected_impact": "Mandatory 9pm commercial closure; street lights dimmed; billboards off; govt vehicle fuel cut ~30%.",
+      "observed_expected_impact": "Emergency conservation measures mandate commercial closures by 9:00 PM, the dimming of street lights, and the deactivation of illuminated billboards. The state reduced fuel allocations for government vehicles by 30%.",
       "source_url": "www.irena.org"
     },
     {
@@ -491,7 +491,7 @@
       "quantifiable_targets": "N/A",
       "impact_assessment": "Sovereign forex protection",
       "measure_description": "Biofuel blending requirements to offset petroleum imports.",
-      "observed_expected_impact": "Increasing ethanol content in petrol to stretch limited fuel supplies.",
+      "observed_expected_impact": "Refineries increased the required ethanol blend ratio in retail gasoline to extend the operational runway of limited domestic fuel inventories.",
       "source_url": "www.irena.org"
     },
     {
@@ -508,7 +508,7 @@
       "quantifiable_targets": "5 kW minimum per home",
       "impact_assessment": "Grid resilience & security",
       "measure_description": "Pre-existing structural building codes targeting energy autonomy.",
-      "observed_expected_impact": "All new residential buildings must install solar; non-residential >250 sqm roof; needs 18–23 GW solar + 5.5 GW/33 GWh storage.",
+      "observed_expected_impact": "Building codes require solar installations on all new residential construction and on non-residential structures with roof areas exceeding 250 square meters. Meeting this demand requires deploying 18 to 23 gigawatts of solar capacity alongside 5.5 gigawatts and 33 gigawatt-hours of battery storage.",
       "source_url": "www.irena.org"
     },
     {
@@ -525,7 +525,7 @@
       "quantifiable_targets": "34 solar parks / 560 MW peak",
       "impact_assessment": "Sovereign forex protection",
       "measure_description": "Attempt to offset fuel blockade via domestic solar expansion.",
-      "observed_expected_impact": "~38% of daytime generation from solar; 24% RE target by 2030; full transition needs $8–10B over decade.",
+      "observed_expected_impact": "Solar assets provide 38% of aggregate daytime power generation. The national strategy targets 24% renewable energy penetration by 2030. Executing this full transition requires an estimated capital investment of $8 billion to $10 billion over the next decade.",
       "source_url": "www.irena.org"
     },
     {
@@ -542,7 +542,7 @@
       "quantifiable_targets": "N/A",
       "impact_assessment": "Sovereign forex protection",
       "measure_description": "Localized demand reduction and zero-carbon transport pivots.",
-      "observed_expected_impact": "Encouraging walking/non-fossil transport; decentralizing activities to local level; drastically cutting consumption.",
+      "observed_expected_impact": "Urban planning initiatives prioritize pedestrian infrastructure and non-fossil transport modes. By decentralizing economic activities to local districts, the government aims to force a drastic reduction in aggregate energy consumption.",
       "source_url": "www.irena.org"
     },
     {
@@ -559,7 +559,7 @@
       "quantifiable_targets": "70%+ of new car sales",
       "impact_assessment": "Sovereign forex protection",
       "measure_description": "Sustained penetration of non-fossil vehicles in domestic market.",
-      "observed_expected_impact": "70%+ of new car sales are electric.",
+      "observed_expected_impact": "Electric vehicles constitute over 70% of all new automotive sales.",
       "source_url": "www.irena.org"
     },
     {
@@ -576,7 +576,7 @@
       "quantifiable_targets": "N/A",
       "impact_assessment": "Fossil import displacement",
       "measure_description": "Recommended behavioral adjustments for demand destruction.",
-      "observed_expected_impact": "WFH; cut highway speed by 10 km/h; switch to electric cooking; carpooling; industrial efficiency.",
+      "observed_expected_impact": "Authorities implemented a broad demand-reduction strategy. Directives include mandatory remote work, reducing highway speed limits by 10 kilometers per hour, transitioning residential households to electric cooking, incentivizing carpooling, and enforcing stricter industrial efficiency standards.",
       "source_url": "www.irena.org"
     },
     {
@@ -593,7 +593,7 @@
       "quantifiable_targets": "N/A",
       "impact_assessment": "Fossil import displacement",
       "measure_description": "Institutional assessment of geopolitical energy vulnerabilities.",
-      "observed_expected_impact": "Called fossil dependence 'ripping away national security and sovereignty' at Green Growth Summit.",
+      "observed_expected_impact": "Leadership used the Green Growth Summit to frame fossil fuel reliance as a direct threat that strips away national security and sovereign independence.",
       "source_url": "www.irena.org"
     },
     {
@@ -610,7 +610,7 @@
       "quantifiable_targets": "32.7% demand reduction",
       "impact_assessment": "Fossil import displacement",
       "measure_description": "Bloc-level strategic statements on long-term efficiency goals.",
-      "observed_expected_impact": "Referenced ASEAN Renewable Energy Roadmap; member states' efficiency measures projected to reduce demand by 32.7% by 2050.",
+      "observed_expected_impact": "Strategic planning aligns with the ASEAN Renewable Energy Roadmap. Aggressive energy efficiency measures adopted by member states project a 32.7% reduction in aggregate regional energy demand by 2050.",
       "source_url": "www.irena.org"
     },
     {
@@ -627,7 +627,7 @@
       "quantifiable_targets": "N/A",
       "impact_assessment": "Fossil import displacement",
       "measure_description": "High-level political commitments linking finance to RE deployments.",
-      "observed_expected_impact": "First combined finance/energy/central bank format; Energy Commissioner called for reducing fossil imports, boosting RE production.",
+      "observed_expected_impact": "Institutional leaders convened the first integrated summit merging finance ministries, energy departments, and central banks. The Energy Commissioner established a clear mandate to systematically eliminate fossil fuel imports while rapidly scaling domestic renewable energy production.",
       "source_url": "www.irena.org"
     }
   ]
